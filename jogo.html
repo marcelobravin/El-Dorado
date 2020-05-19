@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Genius</title>
+
+<!--
+    paginas
+        - index (tela de apresentação)
+        - introdução
+        - jogo
+        - fim
+-->
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+    <!-- https://freesound.org/people/Jaz_the_MAN_2/packs/17749/?page=1#sound -->
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        var sequencia = [];
+        var passo     = 0;
+        var FSM       = '';
+        var comSom    = true;
+        var comBGM    = true;
+
+        var audios = [];
+        audios['do']   = new Audio('audio/316898__jaz-the-man-2__do.wav');
+        audios['re']   = new Audio('audio/316908__jaz-the-man-2__re.wav');
+        audios['mi']   = new Audio('audio/316906__jaz-the-man-2__mi.wav');
+        audios['fa']   = new Audio('audio/316904__jaz-the-man-2__fa.wav');
+        audios['BGM']  = new Audio('audio/My-Fat-Cat.mp3');
+        audios['erro'] = new Audio('audio/02_-_Pitfall!_-_A26_-_Death_Fanfare.ogg');
+
+        $(document).ready(function(){
+
+            $("#sound").click(function(){
+                if (audios['BGM'].currentTime == 0) {
+                    audios['BGM'].play();
+                } else {
+                    console.log("tgsdfg");
+                    audios['BGM'].pause();
+                    audios['BGM'].currentTime = 0;
+                }
+            });
+
+            $(".botao").click(function(){
+                let numeroClicado = $(this).text();
+
+                if (comSom) {
+                    switch (numeroClicado) {
+                        case '1': audios['do'].play();
+                            break;
+                        case '2': audios['re'].play();
+                            break;
+                        case '3': audios['mi'].play();
+                            break;
+                        case '4': audios['fa'].play();
+                            break;
+                    }
+                }
+
+                if (FSM == "play") {
+                    if (numeroClicado == sequencia[ passo ]) {
+                        if (sequencia.length == passo+1) {
+                            FSM = 'watch';
+                            exibir("Acertou a sequencia: "+ (sequencia.length) +"!");
+                            passo = 0;
+                            // setTimeout(function(){ exibir("Aguarde...") }, 2000);
+                            setTimeout(function(){
+                                IncrementarSequencia();
+                                demonstrarSequencia();
+                            }, 2000); // demonstra
+                        } else {
+                            passo++;
+                            $("#passo").val(passo+1 + "º");
+                            exibir("Acertou o "+ passo);
+                        }
+                    } else {
+                        /**/
+                        audios['erro'].play();
+                        exibir("Errou");
+
+                        setTimeout(function(){
+                            passo = 0;
+                            // $("#passo").val(passo+1 + "º");
+                            sequencia = [];
+                            IncrementarSequencia();
+                            demonstrarSequencia();
+                        }, 2000); // demonstra
+                    }
+                }
+            });
+
+            gameStart();
+        });
+
+///////////////////////////////////////////////////////////////////////////////;
+        function demonstrarSequencia ()
+        {
+            exibir("Memorize...");
+            FSM = 'watch'; // repetido
+
+            for (var i=0; i<=sequencia.length-1; i++) {
+                let x = sequencia[i];
+
+                setTimeout(function(){
+                    $(".ativo").removeClass("ativo");
+                    $(".botao[data-numero="+ x +"]").click();
+                    $(".botao[data-numero="+ x +"]").addClass("ativo");
+                }, 1500 *(i+1));
+
+                if (i==sequencia.length-1) {
+                    setTimeout(function(){
+                        $(".ativo").removeClass("ativo");
+                        exibir("Sua vez");
+                        FSM = 'play';
+                    }, 1500 *(i+1) +2000);
+                }
+            }
+        }
+
+        function IncrementarSequencia ()
+        {
+            let r = getRandomInt(1, 4);
+            sequencia.push(r);
+            $("#sequencia").val(sequencia);
+            $("#passo").val(passo+1 + "º");
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function exibir (mensagem)
+        {
+            $("#resposta").text( mensagem );
+        }
+
+        function gameStart ()
+        {
+            IncrementarSequencia();
+            demonstrarSequencia();
+            if ( comBGM ) {
+                audios['BGM'].play();
+                // console.log(audios['BGM']);
+            }
+        }
+    </script>
+    <style type="text/css">
+        html { background-color: black }
+        #resposta { color: white; }
+        .botao {
+            border: 1px solid #222;
+            outline: none;
+            margin: 2px;
+            cursor: pointer;
+            padding: 45px;
+        }
+
+        .botao:active { box-shadow: 0 0 3px cyan; }
+        .botao.ativo { border: 1px solid white; }
+
+        #verde    { background-color: green  }
+        #amarelo  { background-color: yellow }
+        #azul     { background-color: blue   }
+        #vermelho { background-color: red    }
+
+        .container {
+            border: 1px solid silver;
+            text-align: center;
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        #passo {text-align: center}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="resposta">&nbsp;</div>
+    <hr>
+    <br>
+    <button class="botao" data-numero="1" id="verde">1</button>
+    <button class="botao" data-numero="2" id="amarelo">2</button>
+    <br>
+    <button class="botao" data-numero="3" id="azul">3</button>
+    <button class="botao" data-numero="4" id="vermelho">4</button>
+    <br>
+    <br>
+
+    <hr>
+
+    <input value="===" id="passo">
+    <br>
+    <input value="---" id="sequencia">
+    <br>
+    <br>
+</div>
+
+
+<a id="sound" style="color:red">sound</a>
+
+</body>
+</html>

@@ -1,167 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Genius</title>
-    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
-    <!-- https://freesound.org/people/Jaz_the_MAN_2/packs/17749/?page=1#sound -->
-    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
-    <script type="text/javascript">
-        var sequencia = [];
-        var passo     = 0;
-        var FSM       = '';
-        var comSom    = false;
-        var comBGM    = false;
-
-        var audios = [];
-        audios['do'] = new Audio('316898__jaz-the-man-2__do.wav');
-        audios['re'] = new Audio('316908__jaz-the-man-2__re.wav');
-        audios['mi'] = new Audio('316906__jaz-the-man-2__mi.wav');
-        audios['fa'] = new Audio('316904__jaz-the-man-2__fa.wav');
-
-        $(document).ready(function(){
-            $(".botao").click(function(){
-                let numeroClicado = $(this).text();
-
-                switch (numeroClicado) {
-                    case '1': audios['do'].play();
-                        break;
-                    case '2': audios['re'].play();
-                        break;
-                    case '3': audios['mi'].play();
-                        break;
-                    case '4': audios['fa'].play();
-                        break;
-                }
-
-                if (FSM == "play") {
-                    if (numeroClicado == sequencia[ passo ]) {
-                        if (sequencia.length == passo+1) {
-                            FSM = 'watch';
-                            exibir("Acertou a sequencia: "+ (sequencia.length) +"!");
-                            passo = 0;
-                            // setTimeout(function(){ exibir("Aguarde...") }, 2000);
-                            setTimeout(function(){
-                                IncrementarSequencia();
-                                demonstrarSequencia();
-                            }, 2000); // demonstra
-                        } else {
-                            passo++;
-                            $("#passo").val(passo+1 + "º");
-                            exibir("Acertou o "+ passo);
-                        }
-                    } else {
-                        passo = 0;
-                        $("#passo").val(passo+1 + "º");
-                        exibir("Errou");
-                    }
-                }
-            });
-
-            gameStart();
-        });
-
-///////////////////////////////////////////////////////////////////////////////;
-        function demonstrarSequencia ()
-        {
-            exibir("Memorize...");
-            FSM = 'watch'; // repetido
-
-            for (var i=0; i<=sequencia.length-1; i++) {
-                let x = sequencia[i];
-
-                setTimeout(function(){
-                    $(".ativo").removeClass("ativo");
-                    $(".botao[data-numero="+ x +"]").click();
-                    $(".botao[data-numero="+ x +"]").addClass("ativo");
-                }, 1500 *(i+1));
-
-                if (i==sequencia.length-1) {
-                    setTimeout(function(){
-                        $(".ativo").removeClass("ativo");
-                        exibir("Sua vez");
-                        FSM = 'play';
-                    }, 1500 *(i+1) +2000);
-                }
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>El-Dorado</title>
+        <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+        <!-- <link rel="stylesheet" type="text/css" href=""> -->
+        <style type="text/css">
+            body {
+                text-align:center;
+                margin: 0;
             }
-        }
 
-        function IncrementarSequencia ()
-        {
-            let r = getRandomInt(1, 4);
-            sequencia.push(r);
-            $("#sequencia").val(sequencia);
-            $("#passo").val(passo+1 + "º");
-        }
+            a {
+                position: absolute;
+                bottom: -110%;
+                left: 50%;
+                margin-left: -136px;
 
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min)) + min;
-        }
+                width: 262px;
+                height: 186px;
+                /*background: url('imagens/botão entrar.png')*/
+            }
+            /*a:hover {*/
+                /*background: url('imagens/botão entrar clicado.png')*/
+            /*}*/
 
-        function exibir (mensagem)
-        {
-            $("#resposta").text( mensagem );
-        }
+            #logo {
+                position: absolute;
+            }
+        </style>
 
-        function gameStart ()
-        {
-            IncrementarSequencia();
-            demonstrarSequencia();
-        }
-    </script>
-    <style type="text/css">
-        html { background-color: black }
-        #resposta { color: white; }
-        .botao {
-            border: 1px solid #222;
-            outline: none;
-            margin: 2px;
-            padding: 45px;
-        }
+    </head>
+    <body>
+        <img src="imagens/nome_transparente.png" id="logo">
 
-        .botao:active { box-shadow: 0 0 3px cyan; }
-        .botao.ativo { border: 1px solid white; }
+        <!-- <img src="imagens/menu completo.png"> -->
+        <img src="imagens/tela menu inicial.png">
+        <a href="jogo.html">
+            <img src="imagens/botão entrar clicado.png">
+        </a>
 
-        #verde    { background-color: green  }
-        #amarelo  { background-color: yellow }
-        #azul     { background-color: blue   }
-        #vermelho { background-color: red    }
-
-        .container {
-            border: 1px solid silver;
-            text-align: center;
-            width: 600px;
-            margin: 0 auto;
-        }
-
-        #passo {text-align: center}
-    </style>
-</head>
-<body>
-
-<div class="container">
-
-    <div id="resposta">&nbsp;</div>
-    <hr>
-    <br>
-    <button class="botao" data-numero="1" id="verde">1</button>
-    <button class="botao" data-numero="2" id="amarelo">2</button>
-    <br>
-    <button class="botao" data-numero="3" id="azul">3</button>
-    <button class="botao" data-numero="4" id="vermelho">4</button>
-    <br>
-    <br>
-
-    <hr>
-
-    <input value="===" id="passo">
-    <br>
-    <input value="---" id="sequencia">
-    <br>
-    <br>
-</div>
-
-</body>
+    </body>
 </html>
