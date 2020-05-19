@@ -2,25 +2,25 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Genius</title>
-
+    <title>Genius - Fase 1</title>
 <!--
     paginas
         - index (tela de apresentação)
-        - introdução
+        - introdução personagens
         - jogo
         - fim
+    tirar som de reprovação ao errar
 -->
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
-    <!-- https://freesound.org/people/Jaz_the_MAN_2/packs/17749/?page=1#sound -->
     <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
         var sequencia = [];
         var passo     = 0;
         var FSM       = '';
         var comSom    = true;
-        var comBGM    = true;
+        var comBGM    = false; /////////////////////////////////////////////////
 
+        /* Fonte: https://freesound.org/people/Jaz_the_MAN_2/packs/17749/?page=1#sound */
         var audios = [];
         audios['do']   = new Audio('audio/316898__jaz-the-man-2__do.wav');
         audios['re']   = new Audio('audio/316908__jaz-the-man-2__re.wav');
@@ -28,14 +28,13 @@
         audios['fa']   = new Audio('audio/316904__jaz-the-man-2__fa.wav');
         audios['BGM']  = new Audio('audio/My-Fat-Cat.mp3');
         audios['erro'] = new Audio('audio/02_-_Pitfall!_-_A26_-_Death_Fanfare.ogg');
+        audios['acerto'] = new Audio('audio/03_-_Pitfall!_-_A26_-_Treasure_Fanfare.ogg');
 
         $(document).ready(function(){
-
             $("#sound").click(function(){
                 if (audios['BGM'].currentTime == 0) {
                     audios['BGM'].play();
                 } else {
-                    console.log("tgsdfg");
                     audios['BGM'].pause();
                     audios['BGM'].currentTime = 0;
                 }
@@ -59,32 +58,9 @@
 
                 if (FSM == "play") {
                     if (numeroClicado == sequencia[ passo ]) {
-                        if (sequencia.length == passo+1) {
-                            FSM = 'watch';
-                            exibir("Acertou a sequencia: "+ (sequencia.length) +"!");
-                            passo = 0;
-                            // setTimeout(function(){ exibir("Aguarde...") }, 2000);
-                            setTimeout(function(){
-                                IncrementarSequencia();
-                                demonstrarSequencia();
-                            }, 2000); // demonstra
-                        } else {
-                            passo++;
-                            $("#passo").val(passo+1 + "º");
-                            exibir("Acertou o "+ passo);
-                        }
+                        acertou();
                     } else {
-                        /**/
-                        audios['erro'].play();
-                        exibir("Errou");
-
-                        setTimeout(function(){
-                            passo = 0;
-                            // $("#passo").val(passo+1 + "º");
-                            sequencia = [];
-                            IncrementarSequencia();
-                            demonstrarSequencia();
-                        }, 2000); // demonstra
+                        errou();
                     }
                 }
             });
@@ -93,6 +69,56 @@
         });
 
 ///////////////////////////////////////////////////////////////////////////////;
+        function acertou ()
+        {
+
+            if (sequencia.length == passo+1) {
+                setTimeout(function(){
+                    audios['acerto'].play();
+                }, 1000);
+
+                if (sequencia.length == 5) {
+                    carregarProximaFase();
+                } else {
+                    carregarProximaSequencia();
+                }
+            } else {
+                passo++;
+                $("#passo").val(passo+1 + "º");
+                exibir("Acertou o "+ passo, "acerto");
+            }
+        }
+
+        function carregarProximaFase ()
+        {
+            alert("carregar proxima fase");
+            window.location.href = "fim.html";
+        }
+
+        function carregarProximaSequencia ()
+        {
+            FSM = 'watch';
+            exibir("Acertou a sequencia: "+ (sequencia.length) +"!", "acerto");
+            passo = 0;
+            setTimeout(function(){
+                IncrementarSequencia();
+                demonstrarSequencia();
+            }, 2000);
+        }
+
+        function errou ()
+        {
+            audios['erro'].play();
+            exibir("Errou", "erro");
+
+            setTimeout(function(){
+                passo = 0;
+                sequencia = [];
+                IncrementarSequencia();
+                demonstrarSequencia();
+            }, 2000); // demonstra
+        }
+
         function demonstrarSequencia ()
         {
             exibir("Memorize...");
@@ -131,9 +157,18 @@
             return Math.floor(Math.random() * (max - min)) + min;
         }
 
-        function exibir (mensagem)
+        function exibir (mensagem, tipoMensagem='')
         {
+            $("#resposta").removeClass('erro');
+            $("#resposta").removeClass('acerto');
+
             $("#resposta").text( mensagem );
+
+            if (tipoMensagem == 'acerto') {
+                $("#resposta").addClass('acerto');
+            } else if (tipoMensagem == 'erro') {
+                $("#resposta").addClass('erro');
+            }
         }
 
         function gameStart ()
@@ -142,62 +177,76 @@
             demonstrarSequencia();
             if ( comBGM ) {
                 audios['BGM'].play();
-                // console.log(audios['BGM']);
             }
         }
     </script>
     <style type="text/css">
         html { background-color: black }
-        #resposta { color: white; }
+        body {
+            background: url('imagens/fase 1/fase1 com a porta aberta e a sala 2.png') center bottom no-repeat;
+        }
+        #passo { text-align: center }
+        #resposta {
+            color: white;
+            background: rgba(0,0,0, 0.6);
+            line-height: 32px;
+        }
+        #resposta.acerto { color: lime; }
+        #resposta.erro   { color: red; }
         .botao {
             border: 1px solid #222;
             outline: none;
             margin: 2px;
             cursor: pointer;
-            padding: 45px;
+            /*padding: 45px;*/
+            width: 333px;
+            height: 141px;
         }
 
-        .botao:active { box-shadow: 0 0 3px cyan; }
-        .botao.ativo { border: 1px solid white; }
+        .botao:hover { border: 1px solid white; }
+        .botao:active { box-shadow: 0 0 5px cyan; }
 
-        #verde    { background-color: green  }
-        #amarelo  { background-color: yellow }
-        #azul     { background-color: blue   }
-        #vermelho { background-color: red    }
+        #vermelho { background: url('imagens/botões/botao1.png') red    }
+        #azul     { background: url('imagens/botões/botao2.png') blue   }
+        #verde    { background: url('imagens/botões/botao3.png') green  }
+        #amarelo  { background: url('imagens/botões/botao4.png') yellow }
+
+        #vermelho.ativo, #vermelho:active { background-image: url('imagens/botões/botao1 iluminado.png') }
+        #azul.ativo    , #azul:active     { background-image: url('imagens/botões/botao2 iluminado.png') }
+        #verde.ativo   , #verde:active    { background-image: url('imagens/botões/botao3 iluminado.png') }
+        #amarelo.ativo , #amarelo:active  { background-image: url('imagens/botões/botao4 iluminado.png') }
 
         .container {
+            padding-top: 460px;
+
             border: 1px solid silver;
             text-align: center;
-            width: 600px;
+            height: 800px;
             margin: 0 auto;
+            background: url('imagens/totem/pedra sem os botões.png') center bottom no-repeat;
         }
-
-        #passo {text-align: center}
     </style>
 </head>
 <body>
 
 <div class="container">
     <div id="resposta">&nbsp;</div>
-    <hr>
+    <hr style="
+        margin-bottom: 170px;
+        visibility: hidden
+    ">
+    <button class="botao" data-numero="1" id="azul">1</button>
+    <button class="botao" data-numero="2" id="vermelho">2</button>
     <br>
-    <button class="botao" data-numero="1" id="verde">1</button>
-    <button class="botao" data-numero="2" id="amarelo">2</button>
-    <br>
-    <button class="botao" data-numero="3" id="azul">3</button>
-    <button class="botao" data-numero="4" id="vermelho">4</button>
+    <button class="botao" data-numero="3" id="verde">3</button>
+    <button class="botao" data-numero="4" id="amarelo">4</button>
     <br>
     <br>
-
-    <hr>
 
     <input value="===" id="passo">
     <br>
     <input value="---" id="sequencia">
-    <br>
-    <br>
 </div>
-
 
 <a id="sound" style="color:red">sound</a>
 
