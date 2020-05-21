@@ -1,0 +1,52 @@
+html { background-color: black }
+body { background: center bottom no-repeat; }
+body#fase-1 { background-image: url('../imagens/fase 1/fase1 com a porta aberta e a sala 2.png') }
+body#fase-2 { background-image: url('../imagens/fase 2/fase 2 com tudo em foco e a porta aberta para 3.png') }
+body#fase-3 { background-image: url('../imagens/fase 3/fase 3 com a porta aberta e a sala 4.png') }
+body#fase-4 { background-image: url('../imagens/fase 4/fase 4 com a ponte abaixada.png') }
+
+#passo { text-align: center }
+
+#resposta {
+    color: white;
+    background: rgba(0,0,0, 0.6);
+    line-height: 62px;
+    font-size: 30px;
+    position: fixed;
+    top: 10px;
+    width: 100%;
+}
+#resposta.acerto { color: lime; }
+#resposta.erro   { color: red; }
+
+.botao {
+    border: 1px solid #222;
+    outline: none;
+    margin: 2px;
+    cursor: pointer;
+    /*padding: 45px;*/
+    width: 333px;
+    height: 141px;
+}
+.botao:hover { border: 1px solid white; }
+.botao:active { box-shadow: 0 0 5px cyan; }
+
+#vermelho { background: url('../imagens/botoes/botao1.png') red    }
+#azul     { background: url('../imagens/botoes/botao2.png') blue   }
+#verde    { background: url('../imagens/botoes/botao3.png') green  }
+#amarelo  { background: url('../imagens/botoes/botao4.png') yellow }
+
+#vermelho.ativo, #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
+#azul.ativo    , #azul:active     { background-image: url('../imagens/botoes/botao2 iluminado.png') }
+#verde.ativo   , #verde:active    { background-image: url('../imagens/botoes/botao3 iluminado.png') }
+#amarelo.ativo , #amarelo:active  { background-image: url('../imagens/botoes/botao4 iluminado.png') }
+
+.container {
+    padding-top: 460px;
+
+    border: 1px solid silver;
+    text-align: center;
+    height: 800px;
+    margin: 0 auto;
+    background: url('../imagens/totem/pedra sem os botões.png') center bottom no-repeat;
+}
