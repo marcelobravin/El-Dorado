@@ -3,7 +3,7 @@ var passo     = 0;
 var FSM       = '';
 var comSom    = true;
 var comBGM    = false;
-const PASSOS_VITORIA = 1;
+const PASSOS_VITORIA = 5;
 
 /* Fonte: https://freesound.org/people/Jaz_the_MAN_2/packs/17749/?page=1#sound */
 var audios = [];
@@ -61,11 +61,11 @@ function acertou ()
             audios['acerto'].play();
         }, 1000);
 
-        if (sequencia.length == PASSOS_VITORIA) {
-            carregarProximaFase();
-        } else {
+        // if (sequencia.length == PASSOS_VITORIA) {
+        //     carregarProximaFase();
+        // } else {
             carregarProximaSequencia();
-        }
+        // }
     } else {
         passo++;
         $("#passo").val(passo+1 + "º");
@@ -75,14 +75,19 @@ function acertou ()
 
 function carregarProximaFase ()
 {
-    alert("carregar proxima fase");
     let destino = "fim.html";
     let faseAtual = parseInt( pegarNumeroFase() );
     if (faseAtual < 4) {
+        alert("Meus parabéns você venceu!");
         let proximaFase = faseAtual+1;
         destino = "fase-"+ proximaFase +".html";
+    } else {
+        alert("Carregando próxima fase...");
     }
-    window.location.href = destino;
+
+    setTimeout(function(){
+        window.location.href = destino;
+    }, 2000);
 }
 
 function pegarNumeroFase ()
@@ -107,20 +112,26 @@ function carregarProximaSequencia ()
 function errou ()
 {
     audios['erro'].play();
-    exibir("Errou", "erro");
+    exibir("Errou...", "erro");
 
-    setTimeout(function(){
-        passo = 0;
-        sequencia = [];
-        IncrementarSequencia();
-        demonstrarSequencia();
-    }, 2000); // demonstra
+    if (sequencia.length >= PASSOS_VITORIA) {
+        setTimeout(function(){
+            carregarProximaFase();
+        }, 2000);
+    } else {
+        setTimeout(function(){
+            passo = 0;
+            sequencia = [];
+            IncrementarSequencia();
+            demonstrarSequencia();
+        }, 2000);
+    }
 }
 
 function demonstrarSequencia ()
 {
     exibir("Memorize...");
-    FSM = 'watch'; // repetido
+    FSM = 'watch';
 
     for (var i=0; i<=sequencia.length-1; i++) {
         let x = sequencia[i];
@@ -149,7 +160,8 @@ function IncrementarSequencia ()
     $("#passo").val(passo+1 + "º");
 }
 
-function getRandomInt(min, max) {
+function getRandomInt (min, max)
+{
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;

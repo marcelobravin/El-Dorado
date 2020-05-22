@@ -31,12 +31,12 @@ body#fase-4 { background-image: url('../imagens/fase 4/fase 4 com a ponte abaixa
 .botao:hover { border: 1px solid white; }
 .botao:active { box-shadow: 0 0 5px cyan; }
 
-#vermelho { background: url('../imagens/botoes/botao1.png') red    }
-#azul     { background: url('../imagens/botoes/botao2.png') blue   }
-#verde    { background: url('../imagens/botoes/botao3.png') green  }
-#amarelo  { background: url('../imagens/botoes/botao4.png') yellow }
-
-#vermelho.ativo, #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
+#vermelho { background: url('../imagens/botoes/botao1.png') /*red*/    }
+#azul     { background: url('../imagens/botoes/botao2.png') /*blue*/   }
+#verde    { background: url('../imagens/botoes/botao3.png') /*green*/  }
+#amarelo  { background: url('../imagens/botoes/botao4.png') /*yellow*/ }
+/*
+*/#vermelho.ativo, #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
 #azul.ativo    , #azul:active     { background-image: url('../imagens/botoes/botao2 iluminado.png') }
 #verde.ativo   , #verde:active    { background-image: url('../imagens/botoes/botao3 iluminado.png') }
 #amarelo.ativo , #amarelo:active  { background-image: url('../imagens/botoes/botao4 iluminado.png') }
