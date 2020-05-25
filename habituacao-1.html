@@ -24,20 +24,33 @@
             .invisivel {
                 display: none
             }
+
+            #container-botoes {
+                position: absolute;
+                width: 100%;
+                top: 1140px;
+            }
+
+            #nao,
+            #sim {
+                cursor: pointer;
+            }
         </style>
 
+        <script type="text/javascript" src="assets/scrollTo.js"></script>
         <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
 
-                setTimeout(function(){
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $("#ancora").offset().top
-                    }, 3000);
-                }, 1000);
+                // setTimeout(function(){
+                //     $([document.documentElement, document.body]).animate({
+                //         scrollTop: $("#ancora").offset().top
+                //     }, 3000);
+                // }, 1000);
 
                 let etapa = 0;
-                $("#ancora").click(function(){
+                $("#ancora").click(function(e){
+                    e.preventDefault(); //////////////////////////////////////// colocar nos outros lugares
                     etapa++;
 
                     $("#background").fadeOut("slow");
@@ -46,7 +59,7 @@
                     }, 1000);
 
                     setTimeout(function(){
-                        let imgSrc = 'assets/imagens/introducao/intro-'+etapa+'.jpg';
+                        let imgSrc = 'assets/imagens/habituacao-1/'+etapa+'.jpg';
                         $("#background").attr("src", imgSrc).fadeIn("slow");
                         $([document.documentElement, document.body]).animate({
                             scrollTop: $("#ancora").offset().top
@@ -56,21 +69,37 @@
                             $(".invisivel").removeClass("invisivel");
                             $("#ancora").addClass("invisivel");
                         }
+
                     }, 2000);
                 });
+
+                $("#nao").click(function(){
+                    etapa = 0;
+                    $("#ancora").click();
+                    $("#ancora").removeClass("invisivel");
+                    $("#container-botoes").addClass("invisivel");
+                    // window.location.href = "habituacao-1.html";
+                });
+
+                $("#sim").click(function(){
+                    window.location.href = "fase-1.html";
+                });
+
             });
         </script>
     </head>
+
     <body>
-        <img id="background" src="assets/imagens/introducao/intro-0.png">
+        <img id="background" src="assets/imagens/habituacao-1/0.jpg">
 
         <a href="#" id="ancora">
             Next
         </a>
 
-        <a href="habituacao-1.html" class="invisivel">
-            Iniciar Jogo
-        </a>
+        <div id="container-botoes" class="invisivel">
+            <img id="nao" src="assets/imagens/botoes/botãoNao.png">
+            <img id="sim" src="assets/imagens/botoes/botãoSim.png">
+        </div>
 
     </body>
 </html>

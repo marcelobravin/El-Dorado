@@ -1,8 +1,8 @@
 var sequencia = [];
 var passo     = 0;
 var FSM       = '';
-var comSom    = true;
-var comBGM    = false;
+// var comSom    = true;
+// var comBGM    = false;
 const PASSOS_VITORIA = 5;
 
 /* Fonte: https://freesound.org/people/Jaz_the_MAN_2/packs/17749/?page=1#sound */
@@ -18,6 +18,7 @@ audios['acerto'] = new Audio('audio/03_-_Pitfall!_-_A26_-_Treasure_Fanfare.ogg')
 $(document).ready(function(){
     $("#sound").click(function(){
         if (audios['BGM'].currentTime == 0) {
+            audios['BGM'].loop = true;
             audios['BGM'].play();
         } else {
             audios['BGM'].pause();
@@ -61,11 +62,7 @@ function acertou ()
             audios['acerto'].play();
         }, 1000);
 
-        // if (sequencia.length == PASSOS_VITORIA) {
-        //     carregarProximaFase();
-        // } else {
-            carregarProximaSequencia();
-        // }
+        carregarProximaSequencia();
     } else {
         passo++;
         $("#passo").val(passo+1 + "º");
@@ -137,9 +134,12 @@ function demonstrarSequencia ()
         let x = sequencia[i];
 
         setTimeout(function(){
-            $(".ativo").removeClass("ativo");
             $(".botao[data-numero="+ x +"]").click();
             $(".botao[data-numero="+ x +"]").addClass("ativo");
+
+            setTimeout(function(){
+                $(".ativo").removeClass("ativo");
+            }, 300);
         }, 1500 *(i+1));
 
         if (i==sequencia.length-1) {

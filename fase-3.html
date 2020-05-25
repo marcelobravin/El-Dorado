@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Genius - Fase 3</title>
-<!--
-    paginas
-        - index (tela de apresentação)
-        - introdução personagens
-        - jogo
-        - fim
-    tirar som de reprovação ao errar
--->
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
-    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="assets/jogo.js"></script>
-
+    <script type="text/javascript" src="assets/scrollTo.js"></script>
+    <script type="text/javascript">
+        var comSom    = true;
+        var comBGM    = true;
+    </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
 </head>
 <body id="fase-3">
 
 <div class="container">
     <div id="resposta">&nbsp;</div>
-    <hr style="
+    <hr id="ancora" style="
         margin-bottom: 170px;
         visibility: hidden
     ">
