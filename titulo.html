@@ -30,13 +30,27 @@
             }
         </style>
 
+        <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                setTimeout(function(){
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#ancora").offset().top
+                    }, 3000);
+                }, 1000);
+
+            });
+        </script>
+
     </head>
     <body>
         <img src="imagens/nome_transparente.png" id="logo">
 
         <!-- <img src="imagens/menu completo.png"> -->
         <img src="imagens/tela menu inicial.png">
-        <a href="menu.html">
+        <a href="menu.html" id="ancora">
             <img src="imagens/botão entrar clicado.png">
         </a>
 

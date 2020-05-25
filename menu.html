@@ -23,6 +23,20 @@
             }
         </style>
 
+        <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                setTimeout(function(){
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#ancora").offset().top
+                    }, 3000);
+                }, 1000);
+
+            });
+        </script>
+
     </head>
     <body>
         <img src="imagens/nome_transparente.png" id="logo">
@@ -30,7 +44,7 @@
         <img src="imagens/cena 01.png">
 
         <div id="links">
-            <a href="introducao.html">
+            <a href="introducao.html" id="ancora">
                 <img src="imagens/botoes/options-1.png">
             </a>
             <br>

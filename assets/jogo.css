@@ -1,5 +1,5 @@
 html { background-color: black }
-body { background: center bottom no-repeat; }
+body { background: center bottom no-repeat black; }
 body#fase-1 { background-image: url('../imagens/fase 1/fase1 com a porta aberta e a sala 2.png') }
 body#fase-2 { background-image: url('../imagens/fase 2/fase 2 com tudo em foco e a porta aberta para 3.png') }
 body#fase-3 { background-image: url('../imagens/fase 3/fase 3 com a porta aberta e a sala 4.png') }

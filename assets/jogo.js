@@ -101,7 +101,7 @@ function pegarNumeroFase ()
 function carregarProximaSequencia ()
 {
     FSM = 'watch';
-    exibir("Acertou a sequencia: "+ (sequencia.length) +"!", "acerto");
+    exibir("Acertou a sequência: "+ (sequencia.length) +"!", "acerto");
     passo = 0;
     setTimeout(function(){
         IncrementarSequencia();
