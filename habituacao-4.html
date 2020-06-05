@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>El-Dorado - Habituação 4</title>
+        <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="assets/habituacao.css">
+
+        <script type="text/javascript" src="assets/scrollTo.js"></script>
+        <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="assets/habituacao.js"></script>
+        <script type="text/javascript">
+            function getFraseSequencial (n)
+            {
+                var frases = [
+                    "- Este nível possui dispositivos no solo que nos atrapalham.<br>Vou tentar uma vez",
+                    "- Agora é sua vez."
+                ];
+
+                if (n >= frases.length) {
+                    return -1;
+                }
+
+                return frases[n];
+            }
+        </script>
+    </head>
+
+    <body>
+        <img id="background" src="assets/imagens/habituacao-4/0.png">
+
+        <a href="#" id="ancora">
+            Next
+        </a>
+
+        <div class="typewriter"></div>
+
+        <div id="container-botoes" class="invisivel">
+            <img id="nao" src="assets/imagens/botoes/botãoNao.png">
+            <img id="sim" src="assets/imagens/botoes/botãoSim.png">
+        </div>
+    </body>
+</html>

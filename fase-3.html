@@ -7,11 +7,13 @@
     <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="assets/jogo.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
+    <script type="text/javascript" src="assets/tremor.js"></script>
     <script type="text/javascript">
-        var comSom    = true;
-        var comBGM    = true;
+        var comSom = true;
+        var comBGM = false;
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
+    <link rel="stylesheet" type="text/css" href="assets/shake.css">
 </head>
 <body id="fase-3">
 
@@ -21,20 +23,56 @@
         margin-bottom: 170px;
         visibility: hidden
     ">
-    <button class="botao" data-numero="1" id="azul">1</button>
-    <button class="botao" data-numero="2" id="vermelho">2</button>
+    <div>
+        <button class="botao" data-numero="1" id="azul">1</button>
+        <button class="botao" data-numero="2" id="vermelho">2</button>
+        <br>
+        <button class="botao" data-numero="3" id="verde">3</button>
+        <button class="botao" data-numero="4" id="amarelo">4</button>
+    </div>
     <br>
-    <button class="botao" data-numero="3" id="verde">3</button>
-    <button class="botao" data-numero="4" id="amarelo">4</button>
-    <br>
+    <div class="typewriter"></div>
     <br>
 
     <input value="===" id="passo">
     <br>
     <input value="---" id="sequencia">
+    <br>
+    <a id="sound" style="color:red">sound</a>
 </div>
 
-<a id="sound" style="color:red">sound</a>
+<style type="text/css">
+    .typewriter {
+        width: 760px;
+        height: 230px;
+        position: absolute;
+        display: block;
+        text-align: left;
+        top: 980px;
+        margin-left: -10px;
+        outline: 1px solid red;
 
+        color: #fff;
+        font-size: 30px;
+        font-family: monospace;
+        overflow: hidden; /* Ensures the content is not revealed until the animation */
+    }
+
+    .venceu .container .typewriter { visibility: visible; }
+</style>
+<script type="text/javascript">
+
+    function type (textToDisplay, $output)
+    {
+        var displayInt;
+        textToDisplay = textToDisplay.split(' '); //split the text variable into an array
+        $output.empty(); //clear out the $output variable
+        displayInt = setInterval(function() {
+           var word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
+            if (word == null) { return clearInterval(displayInt); } //if we're out of words to append
+            $output.append(word + ' '); //else, add the word and then a space (.split(' ') will not carry over the spaces)
+        }, 300); //setInterval is delayed 300ms, so a word will be added every 300ms
+    }
+</script>
 </body>
 </html>

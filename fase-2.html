@@ -8,8 +8,8 @@
     <script type="text/javascript" src="assets/jogo.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
     <script type="text/javascript">
-        var comSom    = false;
-        var comBGM    = false;
+        var comSom = false;
+        var comBGM = true;
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
 </head>
@@ -21,20 +21,22 @@
         margin-bottom: 170px;
         visibility: hidden
     ">
-    <button class="botao" data-numero="1" id="azul">1</button>
-    <button class="botao" data-numero="2" id="vermelho">2</button>
-    <br>
-    <button class="botao" data-numero="3" id="verde">3</button>
-    <button class="botao" data-numero="4" id="amarelo">4</button>
+    <div>
+        <button class="botao" data-numero="1" id="azul">1</button>
+        <button class="botao" data-numero="2" id="vermelho">2</button>
+        <br>
+        <button class="botao" data-numero="3" id="verde">3</button>
+        <button class="botao" data-numero="4" id="amarelo">4</button>
+    </div>
     <br>
     <br>
 
     <input value="===" id="passo">
     <br>
     <input value="---" id="sequencia">
+    <br>
+    <a id="sound" style="color:red">sound</a>
 </div>
-
-<a id="sound" style="color:red">sound</a>
 
 </body>
 </html>

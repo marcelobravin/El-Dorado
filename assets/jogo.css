@@ -1,9 +1,16 @@
 html { background-color: black }
 body { background: center bottom no-repeat black; }
-body#fase-1 { background-image: url('../imagens/fase 1/fase1 com a porta aberta e a sala 2.png') }
-body#fase-2 { background-image: url('../imagens/fase 2/fase 2 com tudo em foco e a porta aberta para 3.png') }
-body#fase-3 { background-image: url('../imagens/fase 3/fase 3 com a porta aberta e a sala 4.png') }
-body#fase-4 { background-image: url('../imagens/fase 4/fase 4 com a ponte abaixada.png') }
+body#fase-1 { background-image: url('../assets/imagens/fase-1/0.png') }
+body#fase-2 { background-image: url('../assets/imagens/fase-2/0.png') }
+body#fase-3 { background-image: url('../assets/imagens/fase-3/0.png') }
+body#fase-4 { background-image: url('../assets/imagens/fase-4/0.png') }
+
+.venceu .container { background-image: none !important }
+.venceu .container * { visibility: hidden; }
+body#fase-1.venceu { background-image: url('../assets/imagens/fase-1/vitoria.png') }
+body#fase-2.venceu { background-image: url('../assets/imagens/fase-2/vitoria.png') }
+body#fase-3.venceu { background-image: url('../assets/imagens/fase-3/vitoria.png') }
+body#fase-4.venceu { background-image: url('../assets/imagens/fase-4/vitoria.png') }
 
 #passo { text-align: center }
 
@@ -15,6 +22,7 @@ body#fase-4 { background-image: url('../imagens/fase 4/fase 4 com a ponte abaixa
     position: fixed;
     top: 10px;
     width: 100%;
+    left: 0;
 }
 #resposta.acerto { color: lime; }
 #resposta.erro   { color: red; }
@@ -46,7 +54,16 @@ body#fase-4 { background-image: url('../imagens/fase 4/fase 4 com a ponte abaixa
 
     border: 1px solid silver;
     text-align: center;
+    width: 800px;
     height: 800px;
     margin: 0 auto;
     background: url('../imagens/totem/pedra sem os botões.png') center bottom no-repeat;
 }
+
+a#next {
+    position: absolute;
+    top: 1230px;
+    right: 98px;
+}
+
+/*body { overflow: hidden; }*/

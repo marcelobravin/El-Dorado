@@ -7,28 +7,10 @@
     <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="assets/jogo.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
+    <script type="text/javascript" src="assets/tremor.js"></script>
     <script type="text/javascript">
-        var comSom    = false;
-        var comBGM    = true;
-        audios['tremor'] = new Audio('audio/equake6.wav');
-
-        $(document).ready(function(){
-            setInterval(function(){
-                let r = getRandomInt(0, 100);
-                if (r < 45) {
-                    $("body").addClass('shake');
-                    audios['tremor'].play();
-
-                    setTimeout(function(){
-                        $(".shake").removeClass('shake');
-                        audios['tremor'].pause();
-                        audios['tremor'].currentTime = 0;
-                    }, 1000);
-                }
-            }, 1000);
-
-        });
-
+        var comSom = true;
+        var comBGM = true;
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
     <link rel="stylesheet" type="text/css" href="assets/shake.css">
@@ -41,20 +23,22 @@
         margin-bottom: 170px;
         visibility: hidden
     ">
-    <button class="botao" data-numero="1" id="azul">1</button>
-    <button class="botao" data-numero="2" id="vermelho">2</button>
-    <br>
-    <button class="botao" data-numero="3" id="verde">3</button>
-    <button class="botao" data-numero="4" id="amarelo">4</button>
+    <div>
+        <button class="botao" data-numero="1" id="azul">1</button>
+        <button class="botao" data-numero="2" id="vermelho">2</button>
+        <br>
+        <button class="botao" data-numero="3" id="verde">3</button>
+        <button class="botao" data-numero="4" id="amarelo">4</button>
+    </div>
     <br>
     <br>
 
     <input value="===" id="passo">
     <br>
     <input value="---" id="sequencia">
+    <br>
+    <a id="sound" style="color:red">sound</a>
 </div>
-
-<a id="sound" style="color:red">sound</a>
 
 </body>
 </html>

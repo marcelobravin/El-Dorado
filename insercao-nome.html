@@ -2,7 +2,7 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title>El-Dorado</title>
+        <title>El-Dorado - Inserção de Nome</title>
         <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
         <style type="text/css">
             body {
@@ -13,16 +13,24 @@
 
             a {
                 position: relative;
-                top: -43px;
-                right: 74px;
+                top: -690px;
+                right: -70px;
             }
 
-            #logo {
-                position: absolute;
+            .container {
+                width: 800px;
+                border: 1px solid red;
+                margin: 0 auto;
             }
 
-            .invisivel {
-                display: none
+            input {
+                position: relative;
+                top: -675px;
+                left: 18px;
+                font-size: 50px;
+                width: 380px;
+                background: none;
+                border: none;
             }
         </style>
 
@@ -34,43 +42,39 @@
                     $([document.documentElement, document.body]).animate({
                         scrollTop: $("#ancora").offset().top
                     }, 3000);
+                    selectText();
                 }, 1000);
 
-                let etapa = 0;
-                $("#ancora").click(function(){
-                    etapa++;
 
-                    $("#background").fadeOut("slow");
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $("body").offset().top
-                    }, 1000);
-
-                    setTimeout(function(){
-                        let imgSrc = 'assets/imagens/introducao/intro-'+etapa+'.jpg';
-                        $("#background").attr("src", imgSrc).fadeIn("slow");
-                        $([document.documentElement, document.body]).animate({
-                            scrollTop: $("#ancora").offset().top
-                        }, 3000);
-
-                        if ( etapa == 3) {
-                            $(".invisivel").removeClass("invisivel");
-                            $("#ancora").addClass("invisivel");
-                        }
-                    }, 2000);
+                $('#nome').click(function(){
+                    selectText();
+                });
+                $('#nome').keyup(function(){
+                    sessionStorage.setItem("nome", $(this).val());
+                });
+                $('#nome').blur(function(){
+                    alert("Nome registrado");
                 });
             });
+
+            function selectText ()
+            {
+                const input = document.getElementById('nome');
+                input.focus();
+                input.select();
+            }
         </script>
     </head>
     <body>
-        <img id="background" src="assets/imagens/introducao/intro-0.jpg">
 
-        <a href="#" id="ancora">
-            Next
-        </a>
+        <div class="container">
+            <img id="background" src="assets/imagens/intro-0.png">
 
-        <a href="habituacao-1.html" class="invisivel">
-            Iniciar
-        </a>
+            <input type="text" id="nome" value="Player 1">
 
+            <a href="introducao.html" id="ancora">
+                Next
+            </a>
+        </div>
     </body>
 </html>
