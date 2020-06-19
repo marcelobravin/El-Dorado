@@ -6,14 +6,15 @@
         <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="assets/habituacao.css">
 
-        <script type="text/javascript" src="assets/scrollTo.js"></script>
         <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="assets/scrollTo.js"></script>
+        <script type="text/javascript" src="assets/biblioteca.js"></script>
         <script type="text/javascript" src="assets/habituacao.js"></script>
         <script type="text/javascript">
             function getFraseSequencial (n, bloco=1)
             {
                 let frases;
-                if (bloco == 1) {
+                // if (bloco == 1) {
                     frases = [
                         "- Agora que estamos dentro da pirâmide, consegui descobrir que para chegar a cidade precisamos passar por quatro desafios."
                         , "- O primeiro é o desafio da visão, o segundo é o desafio da audição, o terceiro é o desafio do tato e por fim, o quarto desafio é o da atenção."
@@ -21,12 +22,7 @@
                         , "- Pelo que entendi, precisamos repetir as sequências de cores corretamente."
                         , "- Jogarei uma vez para que você veja como funciona."
                     ];
-                } else {
-                    frases = [
-                        "- Eu não sou bom nisso, tente você aventureiro."
-                        , "- Você está pronto?"
-                    ];
-                }
+                // }
 
                 if (n >= frases.length) {
                     return -1;

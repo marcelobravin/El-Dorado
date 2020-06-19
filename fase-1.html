@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>E-Dorado - Fase 1</title>
-    <!--
 
-http://eldorado.rodrigues-henrique.com.br/
-
-    -->
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
     <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="assets/jogo.js"></script>
+    <script type="text/javascript" src="assets/vars.js"></script>
+    <script type="text/javascript" src="assets/biblioteca.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
+    <!-- <script type="text/javascript" src="assets/simulacao.js"></script> -->
+    <script type="text/javascript" src="assets/jogo.js"></script>
     <script type="text/javascript">
         var comSom = true;
         var comBGM = false;
@@ -20,28 +19,29 @@ http://eldorado.rodrigues-henrique.com.br/
 </head>
 <body id="fase-1">
 
-<div class="container">
-    <div id="resposta">&nbsp;</div>
-    <hr id="ancora" style="
-        margin-bottom: 170px;
-        visibility: hidden
-    ">
-    <div>
-        <button class="botao" data-numero="1" id="azul">1</button>
-        <button class="botao" data-numero="2" id="vermelho">2</button>
+    <div class="container">
+        <div id="resposta">&nbsp;</div>
+        <hr id="ancora" style="
+            margin-bottom: 170px;
+            visibility: hidden
+        ">
+        <div>
+            <button class="botao" data-numero="1" id="azul">1</button>
+            <button class="botao" data-numero="2" id="vermelho">2</button>
+            <br>
+            <button class="botao" data-numero="3" id="verde">3</button>
+            <button class="botao" data-numero="4" id="amarelo">4</button>
+        </div>
         <br>
-        <button class="botao" data-numero="3" id="verde">3</button>
-        <button class="botao" data-numero="4" id="amarelo">4</button>
-    </div>
-    <br>
-    <br>
 
-    <input value="===" id="passo">
-    <br>
-    <input value="---" id="sequencia">
-    <br>
-    <a id="sound" style="color:red">sound</a>
-</div>
+        <input value="..." id="tamanhoSequencia">
+        <br>
+        <input value="===" id="passo">
+        <br>
+        <input value="---" id="sequencia">
+        <br>
+        <a id="sound" style="color:red">sound</a>
+    </div>
 
 </body>
 </html>

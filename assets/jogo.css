@@ -1,5 +1,9 @@
 html { background-color: black }
 body { background: center bottom no-repeat black; }
+
+body {border: 2px solid red}
+body.simulacao {border: 2px solid gray}
+
 body#fase-1 { background-image: url('../assets/imagens/fase-1/0.png') }
 body#fase-2 { background-image: url('../assets/imagens/fase-2/0.png') }
 body#fase-3 { background-image: url('../assets/imagens/fase-3/0.png') }
@@ -32,23 +36,22 @@ body#fase-4.venceu { background-image: url('../assets/imagens/fase-4/vitoria.png
     border: 1px solid #222;
     outline: none;
     margin: 2px;
-    cursor: pointer;
     /*padding: 45px;*/
     width: 333px;
     height: 141px;
 }
-.botao:hover { border: 1px solid white; }
-.botao:active { box-shadow: 0 0 5px cyan; }
+body:not(.simulacao) .botao:hover { border: 1px solid white; cursor: pointer;}
+body:not(.simulacao) .botao:active { box-shadow: 0 0 5px cyan; }
 
 #vermelho { background: url('../imagens/botoes/botao1.png') /*red*/    }
 #azul     { background: url('../imagens/botoes/botao2.png') /*blue*/   }
 #verde    { background: url('../imagens/botoes/botao3.png') /*green*/  }
 #amarelo  { background: url('../imagens/botoes/botao4.png') /*yellow*/ }
-/*
-*/#vermelho.ativo, #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
-#azul.ativo    , #azul:active     { background-image: url('../imagens/botoes/botao2 iluminado.png') }
-#verde.ativo   , #verde:active    { background-image: url('../imagens/botoes/botao3 iluminado.png') }
-#amarelo.ativo , #amarelo:active  { background-image: url('../imagens/botoes/botao4 iluminado.png') }
+
+#vermelho.ativo, body:not(.simulacao) #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
+#azul.ativo    , body:not(.simulacao) #azul:active     { background-image: url('../imagens/botoes/botao2 iluminado.png') }
+#verde.ativo   , body:not(.simulacao) #verde:active    { background-image: url('../imagens/botoes/botao3 iluminado.png') }
+#amarelo.ativo , body:not(.simulacao) #amarelo:active  { background-image: url('../imagens/botoes/botao4 iluminado.png') }
 
 .container {
     padding-top: 460px;
