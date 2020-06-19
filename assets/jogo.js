@@ -40,6 +40,11 @@ $(document).ready(function(){
             }
         }
 
+        $(this).addClass("ativo");
+        setTimeout(function(){
+            $(".ativo").removeClass("ativo");
+        }, 300);
+
         if (FSM == "play") {
             if (numeroClicado == sequencia[ passo ]) {
                 acertou();
@@ -49,7 +54,7 @@ $(document).ready(function(){
         }
     });
 
-    gameStart();
+    iniciarJogo();
 });
 
 ///////////////////////////////////////////////////////////////////////////////;
@@ -87,6 +92,7 @@ function carregarProximaFase ()
     var textToDisplay = 'getFraseSequencial(etapa)';
     var $output = $(".typewriter");
     type(textToDisplay, $output);
+
 /*
     if (textToDisplay == -1) {
         type("Você está pronto(a)?", $output);
@@ -165,16 +171,15 @@ function demonstrarSequencia ()
 
         setTimeout(function(){
             $(".botao[data-numero="+ x +"]").click();
-            $(".botao[data-numero="+ x +"]").addClass("ativo");
-
-            setTimeout(function(){
-                $(".ativo").removeClass("ativo");
-            }, 300);
+            // $(".botao[data-numero="+ x +"]").addClass("ativo");
+            // setTimeout(function(){
+                // $(".ativo").removeClass("ativo");
+            // }, 300);
         }, 2000 *(i+1));
 
         if ( i==sequencia.length-1  ) {
             setTimeout(function(){
-                $(".ativo").removeClass("ativo");
+                // $(".ativo").removeClass("ativo");
                 exibir("Sua vez");
                 FSM = 'play';
             }, 1500 *(i+1) +2000);
@@ -211,7 +216,7 @@ function exibir (mensagem, tipoMensagem='')
     }
 }
 
-function gameStart ()
+function iniciarJogo ()
 {
     IncrementarSequencia();
     if ( comBGM ) {
@@ -238,6 +243,6 @@ function getFraseAleatoria ()
         "- Vamos novamente."
     ];
 
-    let r = getRandomInt(1, frases.length);
-    return frases[r-1];
+    let r = getRandomInt(0, frases.length-1);
+    return frases[r];
 }

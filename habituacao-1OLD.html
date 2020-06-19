@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>El-Dorado - Habituação 1</title>
+        <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+        <style type="text/css">
+            body {
+                text-align:center;
+                margin: 0;
+                background-color: black;
+            }
+
+            a {
+                position: relative;
+                top: -43px;
+                right: 74px;
+            }
+
+            #logo {
+                position: absolute;
+            }
+
+            .invisivel {
+                display: none
+            }
+
+            #container-botoes {
+                position: absolute;
+                width: 100%;
+                top: 1140px;
+            }
+
+            #nao,
+            #sim {
+                cursor: pointer;
+            }
+        </style>
+
+        <script type="text/javascript" src="assets/scrollTo.js"></script>
+        <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+
+                let etapa = 0;
+                $("#ancora").click(function(e){
+                    e.preventDefault();
+                    etapa++;
+
+                    $("#background").fadeOut("slow");
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("body").offset().top
+                    }, 1000);
+
+                    setTimeout(function(){
+                        let imgSrc = 'assets/imagens/habituacao-1/'+etapa+'.jpg';
+                        $("#background").attr("src", imgSrc).fadeIn("slow");
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $("#ancora").offset().top
+                        }, 3000);
+
+                        if ( etapa == 4) {
+                            $(".invisivel").removeClass("invisivel");
+                            $("#ancora").addClass("invisivel");
+                        }
+
+                    }, 2000);
+                });
+
+                $("#nao").click(function(){
+                    etapa = 0;
+                    $("#ancora").click();
+                    $("#ancora").removeClass("invisivel");
+                    $("#container-botoes").addClass("invisivel");
+                    // window.location.href = "habituacao-1.html";
+                });
+
+                $("#sim").click(function(){
+                    window.location.href = "fase-1.html";
+                });
+
+            });
+        </script>
+    </head>
+
+    <body>
+        <img id="background" src="assets/imagens/habituacao-1/0.jpg">
+
+        <a href="#" id="ancora">
+            Next
+        </a>
+
+        <div id="container-botoes" class="invisivel">
+            <img id="nao" src="assets/imagens/botoes/botãoNao.png">
+            <img id="sim" src="assets/imagens/botoes/botãoSim.png">
+        </div>
+
+    </body>
+</html>

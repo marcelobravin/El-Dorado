@@ -34,6 +34,7 @@ body {
 }
 
 .typewriter {
+    background: #2f4f4f;
     width: 760px;
     height: 230px;
     position: absolute;

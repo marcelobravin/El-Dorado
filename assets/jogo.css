@@ -12,6 +12,7 @@ body#fase-2.venceu { background-image: url('../assets/imagens/fase-2/vitoria.png
 body#fase-3.venceu { background-image: url('../assets/imagens/fase-3/vitoria.png') }
 body#fase-4.venceu { background-image: url('../assets/imagens/fase-4/vitoria.png') }
 
+#tamanhoSequencia,
 #passo { text-align: center }
 
 #resposta {
