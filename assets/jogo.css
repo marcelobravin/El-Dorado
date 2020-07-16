@@ -4,10 +4,10 @@ body { background: center bottom no-repeat black; }
 body {border: 2px solid red}
 body.simulacao {border: 2px solid gray}
 
-body#fase-1 { background-image: url('../assets/imagens/fase-1/0.png') }
-body#fase-2 { background-image: url('../assets/imagens/fase-2/0.png') }
-body#fase-3 { background-image: url('../assets/imagens/fase-3/0.png') }
-body#fase-4 { background-image: url('../assets/imagens/fase-4/0.png') }
+body.fase-1 { background-image: url('../assets/imagens/fase-1/0.png') }
+body.fase-2 { background-image: url('../assets/imagens/fase-2/0.png') }
+body.fase-3 { background-image: url('../assets/imagens/fase-3/0.png') }
+body.fase-4 { background-image: url('../assets/imagens/fase-4/0.png') }
 
 .venceu .container { background-image: none !important }
 .venceu .container * { visibility: hidden; }
@@ -61,13 +61,41 @@ body:not(.simulacao) .botao:active { box-shadow: 0 0 5px cyan; }
     width: 800px;
     height: 800px;
     margin: 0 auto;
-    background: url('../imagens/totem/pedra sem os botões.png') center bottom no-repeat;
+    /*background: url('../imagens/totem/pedra sem os botões.png') center bottom no-repeat;*/
 }
+
+
+.invisivel { display: none !important }
+
+.typewriter {
+    background: #2f4f4f;
+    width: 760px;
+    height: 230px;
+    position: absolute;
+    display: block;
+    text-align: left;
+    top: 980px;
+    margin-left: -10px;
+    /*outline: 1px solid red;*/
+
+    color: #fff;
+    font-size: 30px;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+}
+
+
+
 
 a#next {
     position: absolute;
-    top: 1230px;
-    right: 98px;
+    top: 1206px;
+    right: 322px;
+    height: 44px;
+    width: 39px;
+    color: transparent;
+    z-index: 10;
+    display: block;
+    background: url('../assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
+    visibility: visible;
 }
-
-/*body { overflow: hidden; }*/

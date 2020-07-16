@@ -11,34 +11,27 @@
         <script type="text/javascript" src="assets/biblioteca.js"></script>
         <script type="text/javascript" src="assets/habituacao.js"></script>
         <script type="text/javascript">
-            function getFraseSequencial (n, bloco=1)
-            {
-                let frases;
-                // if (bloco == 1) {
-                    frases = [
-                        "- Agora que estamos dentro da pirâmide, consegui descobrir que para chegar a cidade precisamos passar por quatro desafios."
-                        , "- O primeiro é o desafio da visão, o segundo é o desafio da audição, o terceiro é o desafio do tato e por fim, o quarto desafio é o da atenção."
-                        , "- Veja a nossa frente existe um totem com quatro pedras preciosas, tentarei desvendar o enigma."
-                        , "- Pelo que entendi, precisamos repetir as sequências de cores corretamente."
-                        , "- Jogarei uma vez para que você veja como funciona."
-                    ];
-                // }
+            var comSE  = true;
+            var comBGM = false;
 
-                if (n >= frases.length) {
-                    return -1;
-                }
-
-                return frases[n];
-            }
+            let frases = [
+                "- Agora que estamos dentro da pirâmide, consegui descobrir que para chegar a cidade precisamos passar por quatro desafios."
+                , "- O primeiro é o desafio da visão, o segundo é o desafio da audição, o terceiro é o desafio do tato e por fim, o quarto desafio é o da atenção."
+                , "- Veja a nossa frente existe um totem com quatro pedras preciosas, tentarei desvendar o enigma."
+                , "- Pelo que entendi, precisamos repetir as sequências de cores corretamente."
+                , "- Jogarei uma vez para que você veja como funciona."
+            ];
         </script>
     </head>
 
     <body>
         <img id="background" src="assets/imagens/habituacao-1/0.jpg">
 
-        <a href="#" id="ancora">
-            Next
-        </a>
+        <div class="nextContainer">
+            <a href="#" id="ancora">
+                Next
+            </a>
+        </div>
 
         <div class="typewriter"></div>
 

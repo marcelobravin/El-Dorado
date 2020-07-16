@@ -4,12 +4,16 @@ body {
     background-color: black;
 }
 
-a {
+a  {
     position: relative;
     top: 1224px;
-    right: 54px;
-    height: 20px;
-    width: 20px;
+    right: -90%;
+    height: 44px;
+    width: 39px;
+    color: transparent;
+    z-index: 10;
+    display: block;
+    background: url('../assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
 }
 
 .invisivel {
@@ -34,18 +38,22 @@ body {
 }
 
 .typewriter {
-    background: #2f4f4f;
-    width: 760px;
-    height: 230px;
+    background: #000000;
+    width: 800px;
+    height: 320px;
     position: absolute;
     display: block;
     text-align: left;
-    top: 980px;
-    margin-left: -10px;
-    /*outline: 1px solid red;*/
-
+    top: 952px;
+    /*margin-left: -10px;*/
+    /*padding: 10px;*/
     color: #fff;
     font-size: 30px;
     font-family: monospace;
-    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    overflow: hidden;
+}
+
+.nextContainer {
+    position: absolute;
+    width: 800px;
 }

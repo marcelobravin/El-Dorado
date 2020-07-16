@@ -51,3 +51,8 @@ function simularJogada (x)
         }, TEMPO/2 -50);
     }, TEMPO/2 -50);
 }
+
+function getStageNumber ()
+{
+    return window.location.search.substr(2);
+}

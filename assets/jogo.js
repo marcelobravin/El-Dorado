@@ -7,8 +7,7 @@ var frases = [
     "- Muito bom, estamos quase conseguindo.",
     "- Você é incrível.",
     "- Continue assim.",
-
-    "- Tente Novamente.",
+    "- Tente novamente.",
     "- Vamos novamente."
 ];
 

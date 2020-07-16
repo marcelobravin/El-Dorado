@@ -29,7 +29,11 @@ function acertou ()
     } else {
         passo++;
         $("#passo").val(passo+1 + "º");
-        exibir("Acertou o passo "+ passo, "acerto");
+        if ( SIMULACAO ) {
+            exibir("Acertei o passo "+ passo, "acerto");
+        } else {
+            exibir("Acertou o passo "+ passo, "acerto");
+        }
     }
 }
 
@@ -48,14 +52,18 @@ function errou ()
         setTimeout(function(){
 
             if ( SIMULACAO ) {
-                alert("Eu não sou muito bom nisso...")
-                let parametroGet = window.location.search.substr(2);
 
-                if (confirm("Você está pronto?")) {
-                    window.location.href = "fase-"+ parametroGet +".html";
-                } else {
-                    window.location.href = "habituacao-"+ parametroGet +".html";
-                }
+                alert("Eu não sou muito bom nisso...")
+                apresentaOpcoes();
+
+/*
+                $(".typewrite").removeClass('invisivel');
+                type("Eu não sou muito bom nisso...");
+
+                // libera botao para
+                let botao = "<a onclick='apresentaOpcoes()'>Next</a>";
+                $("body").append(botao);
+*/
             } else {
                 carregarProximaFase();
             }
@@ -102,34 +110,71 @@ function demonstrarSequencia ()
     }
 }
 
-function carregarProximaFase ()
+/* -------------------------------------------- pode ser em carater de SIMULACAO */
+function carregarProximaFase (/*habituacao = false*/)
 {
-    $("body").addClass("venceu");
-    // alert("Meus parabéns você venceu!");
-
-    let destino = "";
-    let faseAtual = parseInt( pegarNumeroFase() );
-    if (faseAtual < 4) {
-        let proximaFase = faseAtual+1;
-        destino = "habituacao-"+ proximaFase +".html";
+    if ( SIMULACAO ) {
+        let faseAtual = parseInt( pegarNumeroFase() );
+        destino = "fase-"+ faseAtual +".html";
+        setTimeout(function(){
+            window.location.href = destino;
+        }, 2000);
     } else {
-        destino = "fim.html";
+        $("body").addClass("venceu");
+        // alert("Meus parabéns você venceu!");
+
+        let destino = "";
+        let faseAtual = parseInt( pegarNumeroFase() );
+        sessionStorage.setItem('fase-'+faseAtual, sequencia.length);
+        if (faseAtual < 4) {
+            let proximaFase = faseAtual+1;
+            destino = "habituacao-"+ proximaFase +".html";
+        } else {
+            destino = "fim.html";
+        }
+
+
+
+
+console.log("-----------------");
+
+        var textToDisplay = 'getFraseSequencial(etapa)';
+        var $output = $(".typewriter");
+        type(textToDisplay, $output);
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("body").offset().top
+        }, 10);
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("body").offset().bottom
+        }, 3000);
+
+        $(".container").append('<a id="next" href="'+ destino +'">Próxima Fase</a>');
     }
+}
 
-    var textToDisplay = 'getFraseSequencial(etapa)';
-    var $output = $(".typewriter");
-    type(textToDisplay, $output);
+function apresentaOpcoes ()
+{
+    let parametroGet = window.location.search.substr(2);
 
-    $("body").append('<a id="next" href="'+ destino +'">Proxima Fase</a>');
-    $([document.documentElement, document.body]).animate({
-        scrollTop: $("body").offset().top
-    }, 3000);
+    if ( confirm("Você está pronto?") ) {
+        window.location.href = "fase-"+ parametroGet +".html";
+    } else {
+        window.location.href = "habituacao-"+ parametroGet +".html";
+    }
 }
 
 function carregarProximaSequencia ()
 {
     FSM = 'watch';
-    exibir("Acertou a sequência: "+ (sequencia.length) +"!", "acerto");
+
+    if ( SIMULACAO ) {
+        exibir("Acertei a sequência: "+ (sequencia.length) +"!", "acerto");
+    } else {
+        exibir("Acertou a sequência: "+ (sequencia.length) +"!", "acerto");
+    }
+
     passo = 0;
     setTimeout(function(){
         IncrementarSequencia();
@@ -141,9 +186,13 @@ function IncrementarSequencia ()
 {
     let r = getRandomInt(1, 4);
     sequencia.push(r);
+
     $("#tamanhoSequencia").val(sequencia.length);
     $("#sequencia").val(sequencia);
     $("#passo").val(passo+1 + "º");
+    if ( sequencia.length > PASSOS_VITORIA ) {
+        $("#tamanhoSequencia").val(sequencia.length).css('background', 'lime');
+    }
 }
 
 function exibir (mensagem, tipoMensagem='')
@@ -159,7 +208,7 @@ function exibir (mensagem, tipoMensagem='')
 
 function ativarBotao (numeroClicado)
 {
-    if ( comSom ) {
+    if ( comSE ) {
         switch ( parseInt(numeroClicado) ) {
             case 1: audios['do'].play();
                 break;
@@ -195,6 +244,7 @@ function type (textToDisplay, $output)
         var word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
         if (word == null) { return clearInterval(displayInt); } //if we're out of words to append
         $output.append(word + ' '); //else, add the word and then a space (.split(' ') will not carry over the spaces)
+        console.log(word);
     }, 10); //setInterval is delayed 300ms, so a word will be added every 300ms
 }
 
@@ -202,6 +252,15 @@ function getFraseAleatoria ()
 {
     let r = getRandomInt(0, frases.length);
     return frases[r];
+}
+
+function getFraseSequencial (n)
+{
+    if (n >= frases.length) {
+        return -1;
+    }
+
+    return frases[n];
 }
 
 function pegarNumeroFase ()

@@ -7,7 +7,7 @@ $(document).ready(function(){
         var textToDisplay = getFraseSequencial(etapa);
         var $output = $(".typewriter");
 
-        if ( bloco == 0) {
+        // if ( bloco == 0) {
             textToDisplay = getFraseSequencial(etapa);
 
             if (textToDisplay == -1) {
@@ -22,19 +22,19 @@ $(document).ready(function(){
                 type(textToDisplay, $output);
                 etapa++;
             }
-        } else {
-            textToDisplay = getFraseSequencial(etapa, 2);
+        // } else {
+        //     textToDisplay = getFraseSequencial(etapa);
 
-            if (textToDisplay == -1) {
-                $("#ancora").addClass("invisivel");
-                setTimeout(function(){
-                    $("#container-botoes").removeClass("invisivel");
-                }, 1500);
-            } else {
-                type(textToDisplay, $output);
-                etapa++;
-            }
-        }
+        //     if (textToDisplay == -1) {
+        //         $("#ancora").addClass("invisivel");
+        //         setTimeout(function(){
+        //             $("#container-botoes").removeClass("invisivel");
+        //         }, 1500);
+        //     } else {
+        //         type(textToDisplay, $output);
+        //         etapa++;
+        //     }
+        // }
     });
 
     $("#nao").click(function(){
@@ -49,14 +49,7 @@ $(document).ready(function(){
         $("#ancora").click();
     }, 1500);
 });
-
-// function getRandomInt (min, max)
-// {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min)) + min;
-// }
-
+/*
 function carregarProximaFase ()
 {
     let faseAtual = parseInt( pegarNumeroFase() );
@@ -64,12 +57,4 @@ function carregarProximaFase ()
     setTimeout(function(){
         window.location.href = destino;
     }, 2000);
-}
-
-// function pegarNumeroFase ()
-// {
-//     const f = window.location.href;
-//     let x = f.split('-');
-//     let numero = x[1][0];
-//     return parseInt(numero);
-// }
+}*/

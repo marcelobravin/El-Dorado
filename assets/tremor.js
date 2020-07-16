@@ -1,7 +1,9 @@
 audios['tremor'] = new Audio('audio/equake6.wav');
 
-$(document).ready(function(){
-    setInterval(function(){
+var tremorInterval;
+function iniciarTremor ()
+{
+    tremorInterval = setInterval(function(){
         let r = getRandomInt(0, 100);
         if (r < 45) {
             $("body").addClass('shake');
@@ -14,4 +16,9 @@ $(document).ready(function(){
             }, 1000);
         }
     }, 1000);
-});
+}
+
+function pararTremor ()
+{
+    tremorInterval.clearInterval();
+}

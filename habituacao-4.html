@@ -6,32 +6,28 @@
         <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="assets/habituacao.css">
 
-        <script type="text/javascript" src="assets/scrollTo.js"></script>
         <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="assets/scrollTo.js"></script>
+        <script type="text/javascript" src="assets/biblioteca.js"></script>
         <script type="text/javascript" src="assets/habituacao.js"></script>
         <script type="text/javascript">
-            function getFraseSequencial (n)
-            {
-                var frases = [
-                    "- Este nível possui dispositivos no solo que nos atrapalham.<br>Vou tentar uma vez",
-                    "- Agora é sua vez."
-                ];
+            var comSE  = true;
+            var comBGM = true;
 
-                if (n >= frases.length) {
-                    return -1;
-                }
-
-                return frases[n];
-            }
+            let frases = [
+                "- Este nível possui dispositivos no solo que nos atrapalham.<br>Vou tentar uma vez"
+            ];
         </script>
     </head>
 
     <body>
         <img id="background" src="assets/imagens/habituacao-4/0.png">
 
-        <a href="#" id="ancora">
-            Next
-        </a>
+        <div class="nextContainer">
+            <a href="#" id="ancora">
+                Next
+            </a>
+        </div>
 
         <div class="typewriter"></div>
 
