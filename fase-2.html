@@ -19,13 +19,18 @@
 </head>
 
 <body class="fase-2">
+
     <div class="container">
-        <div id="palco">
+
+        <a href="menu.html" id="botaoFechar">X</a>
+
+        <div id="palcoJogo">
             <div id="resposta">&nbsp;</div>
             <hr id="ancora" style="
                 margin-bottom: 170px;
                 visibility: hidden
             ">
+
             <div>
                 <button class="botao" data-numero="1" id="azul">1</button>
                 <button class="botao" data-numero="2" id="vermelho">2</button>
@@ -35,15 +40,27 @@
             </div>
             <br>
 
-            <input value="..." id="tamanhoSequencia">
-            <br>
-            <input value="===" id="passo">
-            <br>
-            <input value="---" id="sequencia">
-            <br>
-            <a id="sound" style="color:red">BGM</a>
+            <div id="debug">
+                <input value="..." id="tamanhoSequencia">
+                <br>
+                <input value="===" id="passo">
+                <br>
+                <input value="---" id="sequencia">
+                <br>
+                <a id="sound" style="color:red">BGM</a>
+            </div>
+
         </div>
+
+
         <div class="typewriter invisivel"></div>
+
+        <div id="containerBotoesConfirm" class="invisivel">
+            <a href="#" onclick="carregarProximaFase()">
+                <img id="botaoSim" src="assets/imagens/botoes/botãoSim.png">
+            </a>
+        </div>
+
     </div>
 
 </body>

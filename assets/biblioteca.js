@@ -41,33 +41,40 @@ function acertou ()
 function errou ()
 {
     console.log("clear os time outs no caso do player jogando");
-    if ( !SIMULACAO ) {
-        $("body").addClass("simulacao");
-    }
+    // if ( !SIMULACAO ) {
+        // $("body").addClass("venceu");
+    // }
 
     const frase = getFraseAleatoria();
     exibir(frase, "erro");
 
     if (sequencia.length > PASSOS_VITORIA || SIMULACAO) {
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("body").offset().top - 10
+        }, 1000);
+
+        $(".typewriter").removeClass("invisivel");
+        $("#palcoJogo").css("visibility", "hidden"); // $("#palcoJogo").remove();
+
+        if ( SIMULACAO ) {
+            $("body").addClass('simulacaoTerminada');
+        } else {
+            $("body").addClass("venceu");
+        }
+
+        if (typeof tremorInterval != 'undefined') {
+            clearInterval(tremorInterval);
+        }
+
         setTimeout(function(){
+            $("#containerBotoesConfirm").removeClass("invisivel");
 
             if ( SIMULACAO ) {
-
-                alert("Eu não sou muito bom nisso...")
-                apresentaOpcoes();
-
-/*
-                $(".typewrite").removeClass('invisivel');
-                type("Eu não sou muito bom nisso...");
-
-                // libera botao para
-                let botao = "<a onclick='apresentaOpcoes()'>Next</a>";
-                $("body").append(botao);
-*/
+                type("Eu não sou muito bom nisso...<br>Você está pronto?");
             } else {
-                carregarProximaFase();
+                type("Parabéns!<br>Você conseguiu!");
             }
-
         }, 3000);
     } else {
         setTimeout(function(){
@@ -121,7 +128,21 @@ function carregarProximaFase (/*habituacao = false*/)
         }, 2000);
     } else {
         $("body").addClass("venceu");
-        // alert("Meus parabéns você venceu!");
+
+console.log("-----------------");
+
+        var textToDisplay = 'getFraseSequencial(etapa)';
+        type(textToDisplay);
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("body").offset().top
+        }, 10);
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("body").offset().bottom
+        }, 3000);
+
+
 
         let destino = "";
         let faseAtual = parseInt( pegarNumeroFase() );
@@ -132,36 +153,7 @@ function carregarProximaFase (/*habituacao = false*/)
         } else {
             destino = "fim.html";
         }
-
-
-
-
-console.log("-----------------");
-
-        var textToDisplay = 'getFraseSequencial(etapa)';
-        var $output = $(".typewriter");
-        type(textToDisplay, $output);
-
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("body").offset().top
-        }, 10);
-
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("body").offset().bottom
-        }, 3000);
-
         $(".container").append('<a id="next" href="'+ destino +'">Próxima Fase</a>');
-    }
-}
-
-function apresentaOpcoes ()
-{
-    let parametroGet = window.location.search.substr(2);
-
-    if ( confirm("Você está pronto?") ) {
-        window.location.href = "fase-"+ parametroGet +".html";
-    } else {
-        window.location.href = "habituacao-"+ parametroGet +".html";
     }
 }
 
@@ -235,17 +227,22 @@ function ativarBotao (numeroClicado)
     }
 }
 
-function type (textToDisplay, $output)
+function type (textToDisplay, INTERVAL=10)
 {
-    var displayInt;
-    textToDisplay = textToDisplay.split(' '); //split the text variable into an array
+    let $output = $(".typewriter");
     $output.empty(); //clear out the $output variable
+
+    let displayInt;
+    textToDisplay = textToDisplay.split(' '); //split the text variable into an array
+
     displayInt = setInterval(function() {
-        var word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
-        if (word == null) { return clearInterval(displayInt); } //if we're out of words to append
+        let word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
+        if (word == null) {
+            // liberaBotaoNext();
+            return clearInterval(displayInt);
+        } //if we're out of words to append
         $output.append(word + ' '); //else, add the word and then a space (.split(' ') will not carry over the spaces)
-        console.log(word);
-    }, 10); //setInterval is delayed 300ms, so a word will be added every 300ms
+    }, INTERVAL); //setInterval is delayed 300ms, so a word will be added every 300ms
 }
 
 function getFraseAleatoria ()

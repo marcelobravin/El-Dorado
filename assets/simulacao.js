@@ -22,16 +22,20 @@ $(document).ready(function(){
 
 function simularSequencia ()
 {
+    const SIMULATIONS_BEFORE_ERROR = 2;
+
     for (let i=0; i<=sequencia.length-1; i++) {
-        if (i == sequencia.length-1 && sequencia.length >= 3) {
+        if (i == sequencia.length-1 && sequencia.length >= SIMULATIONS_BEFORE_ERROR) {
             introduzirErro = true;
         } else {
             introduzirErro = false;
         }
 
-        let x = sequencia[i];
+        let x = 1;
         if ( introduzirErro ) {
-            x = getRandomInt(1, 4);
+            while (x == sequencia[i]) {
+                x = getRandomInt(1, 4);
+            }
         }
 
         setTimeout(function(){
@@ -42,12 +46,16 @@ function simularSequencia ()
 
 function simularJogada (x)
 {
-    const ICONE_MAO = '<img id="hand" src="assets/imagens/mão para clicar.png" style="position: absolute">';
+    const ICONE_MAO = '<img id="hand" src="assets/imagens/mão para clicar.png">';
+
+    $("#hand").remove();
     $(".botao[data-numero="+ x +"]").append(ICONE_MAO);
+
     setTimeout(function(){
         ativarBotao(x);
         setTimeout(function(){
             $("#hand").remove();
+            $("#debug").append(ICONE_MAO);
         }, TEMPO/2 -50);
     }, TEMPO/2 -50);
 }

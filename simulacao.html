@@ -37,34 +37,94 @@
         });
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/habituacao.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/shake.css">
+    <style type="text/css">
+        #containerBotoesConfirm {
+            position: absolute;
+            width: 800px;
+            bottom: -70px;
+        }
+
+        #botaoNao,
+        #botaoSim {
+            opacity: .8;
+            z-index: 1;
+        }
+
+        #botaoNao:hover,
+        #botaoSim:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+
+        #hand {
+            position: absolute;
+            z-index: 9;
+            display: block;
+        }
+
+        body.simulacaoTerminada {
+            background-image: url('assets/imagens/habituacao-2/0.png');
+            /*background-position-y: -22px;*/
+            background-position-y: -8px;
+
+        }
+
+        body.simulacaoTerminada.shake {
+            background-position-y: 0px;
+        }
+    </style>
 </head>
 
 <body class="simulacao">
 
     <div class="container">
-        <div id="resposta">&nbsp;</div>
-        <hr id="ancora" style="
-            margin-bottom: 170px;
-            visibility: hidden
-        ">
-        <div>
-            <button class="botao" data-numero="1" id="azul">1</button>
-            <button class="botao" data-numero="2" id="vermelho">2</button>
+
+        <a href="menu.html" id="botaoFechar">X</a>
+
+        <div id="palcoJogo">
+            <div id="resposta">&nbsp;</div>
+            <hr id="ancora" style="
+                margin-bottom: 170px;
+                visibility: hidden
+            ">
+
+            <div>
+                <button class="botao" data-numero="1" id="azul">1</button>
+                <button class="botao" data-numero="2" id="vermelho">2</button>
+                <br>
+                <button class="botao" data-numero="3" id="verde">3</button>
+                <button class="botao" data-numero="4" id="amarelo">4</button>
+            </div>
             <br>
-            <button class="botao" data-numero="3" id="verde">3</button>
-            <button class="botao" data-numero="4" id="amarelo">4</button>
+
+            <div id="debug">
+                <input value="..." id="tamanhoSequencia">
+                <br>
+                <input value="===" id="passo">
+                <br>
+                <input value="---" id="sequencia">
+                <br>
+                <a id="sound" style="color:red">BGM</a>
+                <br>
+                <img id="hand" src="assets/imagens/mão para clicar.png">
+            </div>
+
         </div>
-        <br>
 
-        <input value="..." id="tamanhoSequencia">
-        <br>
-        <input value="===" id="passo">
-        <br>
-        <input value="---" id="sequencia">
-        <br>
-        <a id="sound" style="color:red">BGM</a>
+        <div class="typewriter invisivel"></div>
+
+        <div id="containerBotoesConfirm" class="invisivel">
+            <a href="#" onclick="window.location.href = 'habituacao-'+ window.location.search.substr(2) +'.html';   ">
+                <img id="botaoNao" src="assets/imagens/botoes/botãoNao.png">
+            </a>
+
+            <a href="#" onclick="window.location.href = 'fase-'+ window.location.search.substr(2) +'.html';   ">
+                <img id="botaoSim" src="assets/imagens/botoes/botãoSim.png">
+            </a>
+        </div>
     </div>
-
 </body>
 </html>

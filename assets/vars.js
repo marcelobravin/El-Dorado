@@ -1,6 +1,6 @@
-const TEMPO          = 1000; //////////////////////////////////////////////////////////// novo // min 700, tempo do som, senão buga quando toca o mesmo duas vezes seguidas
-const INTERVALO      = 3000; //////////////////////////////////////////////////////////// novo
-const TEMPO_INICIAR  = 3000;
+const TEMPO          = 1000; // min 700, tempo do som, senão buga quando toca o mesmo duas vezes seguidas
+const INTERVALO      = 2000;
+const TEMPO_INICIAR  = 1000;
 const PASSOS_VITORIA = 0;
 
 var FSM       = '';

@@ -20,18 +20,18 @@ a  {
     display: none
 }
 
-#container-botoes {
+#containerBotoesConfirm {
     position: absolute;
     width: 100%;
     top: 1140px;
     z-index: 9;
 }
-
-#nao,
-#sim {
+/*
+#botaoNao,
+#botaoSim {
     cursor: pointer;
 }
-
+*/
 body {
     display: flex;
     justify-content: center;

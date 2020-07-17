@@ -18,7 +18,9 @@ function iniciarTremor ()
     }, 1000);
 }
 
-function pararTremor ()
-{
-    tremorInterval.clearInterval();
-}
+// function pararTremor ()
+// {
+//     if (typeof tremorInterval !== undefined) {
+//         clearInterval(tremorInterval);
+//     }
+// }
