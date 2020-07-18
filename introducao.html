@@ -1,80 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <title>El-Dorado</title>
-        <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
-        <style type="text/css">
-            body {
-                text-align:center;
-                margin: 0;
-                background-color: black;
-            }
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Dorado - Simulação</title>
 
-            a {
-                position: relative;
-                top: -43px;
-                right: 74px;
-            }
+    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+    <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/vars.js"></script> -->
+    <script type="text/javascript" src="assets/biblioteca.js"></script>
+    <script type="text/javascript" src="assets/scrollTo.js"></script>
+    <script type="text/javascript" src="assets/habituacao.js"></script>
 
-            #logo {
-                position: absolute;
-            }
+    <!-- <script type="text/javascript" src="assets/simulacao.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/jogo.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/tremor.js"></script> -->
 
-            .invisivel {
-                display: none
-            }
+    <script type="text/javascript">
+        // var comSE  = false;
+        // var comBGM = false;
 
-            #ancora {
-                color: transparent;
-            }
-        </style>
+        // let parametroGet = getStageNumber();
+        // switch ( parametroGet ) {
+        //     case '1': comSE  = true; break;
+        //     case '2': comBGM = true; break;
+        //     case '3':
+        //         comSE  = true;
+        //         iniciarTremor();
+        //     break;
+        //     case '4':
+        //         comSE  = true;
+        //         comBGM = true;
+        //         iniciarTremor();
+        //     break;
+        // }
 
-        <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function(){
+        // $(document).ready(function(){
+        //     $("body").addClass('fase-'+parametroGet);
+        // });
+        $(document).ready(function(){
+            typewrite();
+        });
+    </script>
+    <link rel="stylesheet" type="text/css" href="assets/jogo.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/habituacao.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/shake.css"> -->
+    <style type="text/css">
+        #containerBotoesConfirm {
+            position: absolute;
+            width: 800px;
+            bottom: -70px;
+        }
+/*
+        #botaoNao,
+        #botaoSim {
+            opacity: .8;
+            z-index: 1;
+        }
 
-                setTimeout(function(){
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $("#ancora").offset().top
-                    }, 3000);
-                }, 1000);
+        #botaoNao:hover,
+        #botaoSim:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
 
-                let etapa = 0;
-                $("#ancora").click(function(){
-                    etapa++;
 
-                    $("#background").fadeOut("slow");
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $("body").offset().top
-                    }, 1000);
+        #hand {
+            position: absolute;
+            z-index: 9;
+            display: block;
+        }*/
+/*
+        body.simulacaoTerminada {
+            background-image: url('assets/imagens/habituacao-2/0.png');
+            background-position-y: -8px;
+        }
 
-                    setTimeout(function(){
-                        let imgSrc = 'assets/imagens/introducao/intro-'+etapa+'.jpg';
-                        $("#background").attr("src", imgSrc).fadeIn("slow");
-                        $([document.documentElement, document.body]).animate({
-                            scrollTop: $("#ancora").offset().top
-                        }, 3000);
+        body.simulacaoTerminada.shake {
+            background-position-y: 0px;
+        }
+*/
+        body {
+            background-image: url('assets/imagens/introducao/intro-0.jpg');
+            background-position-y: -8px;
+        }
+    </style>
+</head>
 
-                        if ( etapa == 3) {
-                            $(".invisivel").removeClass("invisivel");
-                            $("#ancora").addClass("invisivel");
-                        }
-                    }, 2000);
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <img id="background" src="assets/imagens/introducao/intro-0.jpg">
+<body>
 
-        <a href="#" id="ancora">
-            Next
-        </a>
+    <div class="container">
 
-        <a href="habituacao-1.html" class="invisivel">
-            Iniciar
-        </a>
+        <a href="menu.html" id="botaoFechar">X</a>
 
-    </body>
+        <hr id="ancora" style="
+            margin-bottom: 170px;
+            visibility: hidden
+        ">
+
+        <div class="typewriter"></div>
+    </div>
+
+</body>
 </html>

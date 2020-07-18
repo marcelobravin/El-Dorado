@@ -1,8 +1,10 @@
 const SIMULACAO = true;
 
 var frases    = [
-    "- Errei..."
-    , "- Cacete..."
+    "- Errei...",
+    "- Acho que não era essa...",
+    "- Você sabe qual era a correta?",
+    "- Quase..."
 ];
 
 let introduzirErro = false;
