@@ -6,83 +6,115 @@
 
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
     <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
-    <!-- <script type="text/javascript" src="assets/vars.js"></script> -->
     <script type="text/javascript" src="assets/biblioteca.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
-    <script type="text/javascript" src="assets/habituacao.js"></script>
-
-    <!-- <script type="text/javascript" src="assets/simulacao.js"></script> -->
-    <!-- <script type="text/javascript" src="assets/jogo.js"></script> -->
-    <!-- <script type="text/javascript" src="assets/tremor.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/habituacao.js"></script> -->
 
     <script type="text/javascript">
-        // var comSE  = false;
-        // var comBGM = false;
+        let frases = [
+            "- Existe uma lenda de uma cidade perdida."
+            , "- Totalmente feita de ouro puro e com tesouros inimagináveis."
+            , "- Muitos exploradores tentaram achá-la,  porém nenhum conseguiu."
+            , "- Até hoje!"
+        ];
 
-        // let parametroGet = getStageNumber();
-        // switch ( parametroGet ) {
-        //     case '1': comSE  = true; break;
-        //     case '2': comBGM = true; break;
-        //     case '3':
-        //         comSE  = true;
-        //         iniciarTremor();
-        //     break;
-        //     case '4':
-        //         comSE  = true;
-        //         comBGM = true;
-        //         iniciarTremor();
-        //     break;
-        // }
-
-        // $(document).ready(function(){
-        //     $("body").addClass('fase-'+parametroGet);
-        // });
         $(document).ready(function(){
-            typewrite();
+
+            $("#ancora").click(function(e){
+                e.preventDefault();
+                var textToDisplay = getFraseSequencial(etapa);
+
+                if (textToDisplay == -1) {
+
+                    if (bloco == 0) {
+                        frases = [
+                            "- Olá aventureiro, eu me chamo Ariel, que bom que você chegou para me ajudar!"
+                            , "- Estamos próximos de descobrir a cidade mais procurada de todos os tempos, eu tenho certeza disso."
+                            , "- Vamos! Este é o caminho."
+                        ];
+
+                        $("body").addClass('quadro-2');
+
+                    } else if (bloco == 1) {
+                        frases = [
+                            "- Veja, lá está a pirâmide, com certeza ela é a entrada para a cidade de ouro El-Dorado."
+                        ];
+
+                        $("body").addClass('quadro-3');
+                    } else if (bloco == 2) {
+                        $("body").addClass('quadro-4');
+                        $(".typewriter").addClass("invisivel");
+                    } else {
+                        window.location.href = "menu.html";
+                    }
+                    type('');
+
+
+                    etapa = 0;
+                    bloco++;
+                    return;
+                } else {
+                    console.log( textToDisplay );
+                    type(textToDisplay);
+                    etapa++;
+                }
+            });
         });
+
+
+        setTimeout(function(){
+            $("#ancora").click();
+        }, 1500);
+
+        var etapa = 0;
+        var bloco = 0;
+        function typewrite ()
+        {
+            var textToDisplay = getFraseSequencial(etapa);
+
+            if (textToDisplay == -1) {
+                let faseAtual = parseInt( pegarNumeroFase() );
+                window.location.href = "simulacao.html?=" + faseAtual;
+                return;
+
+                // muda para proximo bloco de textos
+                etapa = 0;
+                bloco++;
+            } else {
+                type(textToDisplay);
+                etapa++;
+            }
+        }
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
-    <!-- <link rel="stylesheet" type="text/css" href="assets/habituacao.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="assets/shake.css"> -->
     <style type="text/css">
-        #containerBotoesConfirm {
-            position: absolute;
-            width: 800px;
-            bottom: -70px;
-        }
-/*
-        #botaoNao,
-        #botaoSim {
-            opacity: .8;
-            z-index: 1;
-        }
-
-        #botaoNao:hover,
-        #botaoSim:hover {
-            opacity: 1;
-            cursor: pointer;
-        }
-
-
-        #hand {
-            position: absolute;
-            z-index: 9;
-            display: block;
-        }*/
-/*
-        body.simulacaoTerminada {
-            background-image: url('assets/imagens/habituacao-2/0.png');
-            background-position-y: -8px;
-        }
-
-        body.simulacaoTerminada.shake {
-            background-position-y: 0px;
-        }
-*/
         body {
             background-image: url('assets/imagens/introducao/intro-0.jpg');
             background-position-y: -8px;
         }
+
+        #containerBotoesConfirm {
+            position: absolute;
+            text-align: right;
+            width: 800px;
+        }
+
+        a {
+            position: relative;
+            /*top: 1224px;*/
+            right: -90%;
+            height: 44px;
+            width: 39px;
+            color: transparent;
+            z-index: 10;
+            display: block;
+            background: url('assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
+        }
+
+
+        body.quadro-2 { background-image: url('assets/imagens/introducao/intro-1.jpg'); }
+        body.quadro-3 { background-image: url('assets/imagens/introducao/intro-2.jpg'); }
+        body.quadro-4 { background-image: url('assets/imagens/introducao/intro-3.jpg'); }
     </style>
 </head>
 
@@ -92,12 +124,16 @@
 
         <a href="menu.html" id="botaoFechar">X</a>
 
-        <hr id="ancora" style="
-            margin-bottom: 170px;
-            visibility: hidden
-        ">
-
         <div class="typewriter"></div>
+
+
+        <div id="containerBotoesConfirm" class="">
+
+            <a href="#" id="ancora">
+                Next
+            </a>
+
+        </div>
     </div>
 
 </body>

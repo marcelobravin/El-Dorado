@@ -39,9 +39,10 @@ body {
 
 .typewriter {
     background: #000000;
-    width: 800px;
-    height: 320px;
     position: absolute;
+    width: 800px;
+    height: 300px;
+    padding-top: 20px;
     display: block;
     text-align: left;
     top: 952px;
