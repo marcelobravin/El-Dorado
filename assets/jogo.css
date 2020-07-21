@@ -5,30 +5,40 @@ body.fase-1 { background-image: url('../assets/imagens/fase-1/0.png') }
 body.fase-2 { background-image: url('../assets/imagens/fase-2/0.png') }
 body.fase-3 { background-image: url('../assets/imagens/fase-3/0.png') }
 body.fase-4 { background-image: url('../assets/imagens/fase-4/0.png') }
+body.fase-5 { background-image: url('../assets/imagens/fase-5/0.png') }
 
 body.fase-1.venceu { background-image: url('../assets/imagens/fase-1/vitoria.png') }
 body.fase-2.venceu { background-image: url('../assets/imagens/fase-2/vitoria.png') }
 body.fase-3.venceu { background-image: url('../assets/imagens/fase-3/vitoria.png') }
 body.fase-4.venceu { background-image: url('../assets/imagens/fase-4/vitoria.png') }
 
-/*.venceu > * { opacity: 0; }*/
 .venceu { background-position-y: -8px; }
 
 #tamanhoSequencia,
 #passo { text-align: center }
 
+.shake #resposta { top: 525px; }
 #resposta {
-    color: white;
-    background: rgba(0,0,0, 0.6);
-    line-height: 62px;
-    font-size: 30px;
-    position: fixed;
-    top: 10px;
+    color: black;
+    line-height: 82px;
     width: 100%;
-    left: 0;
+
+    position: fixed;
+
+    height: 109px;
+    z-index: 9999999;
+    background: url('imagens/botoes/balao.jpeg') center center no-repeat;
+
+    font-size: 26px;
+    right: -338px;
+
+    top: 400px;
 }
 #resposta.acerto { color: lime; }
 #resposta.erro   { color: red; }
+
+
+
 
 .botao {
     border: 0;
@@ -37,9 +47,9 @@ body.fase-4.venceu { background-image: url('../assets/imagens/fase-4/vitoria.png
     width: 333px;
     height: 141px;
     display: inline-block;
+    color: transparent;
 }
 body:not(.simulacao) .botao:hover { cursor: pointer;}
-/*body:not(.simulacao) .botao:active { box-shadow: 0 0 5px cyan; }*/
 
 #vermelho { opacity: .8; background: url('../imagens/botoes/botao1.png') /*red*/    }
 #azul     { opacity: .8; background: url('../imagens/botoes/botao2.png') /*blue*/   }
@@ -59,14 +69,11 @@ body:not(.simulacao) #amarelo:hover {
 }
 
 .container {
-    /*padding-bottom: 460px;*/
     padding-top: 460px;
-
     text-align: center;
     width: 800px;
     height: 800px;
     margin: 0 auto;
-    /*background: url('../imagens/totem/pedra sem os botões.png') center bottom no-repeat;*/
 }
 
 
@@ -80,15 +87,11 @@ body:not(.simulacao) #amarelo:hover {
     display: block;
     text-align: left;
     top: 952px;
-    /*margin-left: -10px;*/
-    /*padding: 10px;*/
     color: #fff;
     font-size: 30px;
     font-family: monospace;
     overflow: hidden;
 }
-
-
 
 
 
@@ -104,13 +107,18 @@ a#next {
     display: block;
     background: url('../assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
     visibility: visible;
+
+
+    /*top: 230px;*/
+    /*right: -750px;*/
 }
 
 
 
 #containerBotoesConfirm {
     position: absolute;
-    width: 100%;
+    text-align: right;
+    width: inherit;
     top: 1140px;
     z-index: 9;
 }
@@ -119,7 +127,6 @@ a#next {
 
 #botaoFechar {
     position: fixed;
-    /*position: absolute;*/
     top: 2px;
     width: 729px;
     font-size: 65px;

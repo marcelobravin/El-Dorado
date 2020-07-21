@@ -4,7 +4,8 @@ body {
     background-color: black;
 }
 
-a  {
+#ancora {
+/*a  {*/
     position: relative;
     top: 1224px;
     right: -90%;
@@ -46,7 +47,7 @@ body {
     display: block;
     text-align: left;
     top: 952px;
-    /*margin-left: -10px;*/
+    /*margin-left: 38px;*/
     /*padding: 10px;*/
     color: #fff;
     font-size: 30px;
@@ -57,4 +58,21 @@ body {
 .nextContainer {
     position: absolute;
     width: 800px;
+}
+
+
+
+
+#botaoFechar {
+    position: fixed;
+    top: 2px;
+    width: 729px;
+    font-size: 65px;
+    text-decoration: none;
+    color: orange;
+    font-family: arial;
+    text-shadow: 0px 0px 3px white;
+    z-index: 1;
+    background-image: none;
+    text-align: right;
 }

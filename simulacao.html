@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>E-Dorado - Simulação</title>
-
     <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
+
     <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="assets/vars.js"></script>
     <script type="text/javascript" src="assets/biblioteca.js"></script>
@@ -13,29 +13,6 @@
     <!-- <script type="text/javascript" src="assets/jogo.js"></script> -->
     <script type="text/javascript" src="assets/tremor.js"></script>
 
-    <script type="text/javascript">
-        var comSE  = false;
-        var comBGM = false;
-
-        let parametroGet = getStageNumber();
-        switch ( parametroGet ) {
-            case '1': comSE  = true; break;
-            case '2': comBGM = true; break;
-            case '3':
-                comSE  = true;
-                iniciarTremor();
-            break;
-            case '4':
-                comSE  = true;
-                comBGM = true;
-                iniciarTremor();
-            break;
-        }
-
-        $(document).ready(function(){
-            $("body").addClass('fase-'+parametroGet);
-        });
-    </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
     <!-- <link rel="stylesheet" type="text/css" href="assets/habituacao.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/shake.css">
@@ -65,16 +42,38 @@
             display: block;
         }
 
-        body.simulacaoTerminada {
-            background-image: url('assets/imagens/habituacao-2/0.png');
-            /*background-position-y: -22px;*/
-            background-position-y: -8px;
+        /*body.simulacaoTerminada.fase-1 { background-image: url('assets/imagens/habituacao-1/0.png'); }*/
+        body.simulacaoTerminada.fase-1 { background-image: url('assets/imagens/habituacao-1/0.jpg'); }
+        body.simulacaoTerminada.fase-2 { background-image: url('assets/imagens/habituacao-2/0.png'); }
+        body.simulacaoTerminada.fase-3 { background-image: url('assets/imagens/habituacao-3/0.png'); }
+        body.simulacaoTerminada.fase-4 { background-image: url('assets/imagens/habituacao-4/0.png'); }
+
+        body.simulacaoTerminada { background-position-y: -8px; }
+        body.simulacaoTerminada.shake { background-position-y: 0px; }
+    </style>
+    <script type="text/javascript">
+        var comSE  = false;
+        var comBGM = false;
+
+        let parametroGet = getStageNumber();
+        switch ( parametroGet ) {
+            case '1': comSE  = true; break;
+            case '2': comBGM = true; break;
+            case '3':
+                comSE  = true;
+                iniciarTremor();
+            break;
+            case '4':
+                comSE  = true;
+                comBGM = true;
+                iniciarTremor();
+            break;
         }
 
-        body.simulacaoTerminada.shake {
-            background-position-y: 0px;
-        }
-    </style>
+        $(document).ready(function(){
+            $("body").addClass('fase-'+parametroGet);
+        });
+    </script>
 </head>
 
 <body class="simulacao">
@@ -91,8 +90,8 @@
             ">
 
             <div>
-                <button class="botao" data-numero="1" id="azul">1</button>
-                <button class="botao" data-numero="2" id="vermelho">2</button>
+                <button class="botao" data-numero="1" id="vermelho">1</button>
+                <button class="botao" data-numero="2" id="azul">2</button>
                 <br>
                 <button class="botao" data-numero="3" id="verde">3</button>
                 <button class="botao" data-numero="4" id="amarelo">4</button>

@@ -40,11 +40,6 @@ function acertou ()
 /* -------------------------------------------- pode ser em carater de SIMULACAO */
 function errou ()
 {
-    console.log("clear os time outs no caso do player jogando");
-    // if ( !SIMULACAO ) {
-        // $("body").addClass("venceu");
-    // }
-
     const frase = getFraseAleatoria();
     exibir(frase, "erro");
 
@@ -55,7 +50,7 @@ function errou ()
         }, 1000);
 
         $(".typewriter").removeClass("invisivel");
-        $("#palcoJogo").css("visibility", "hidden"); // $("#palcoJogo").remove();
+        $("#palcoJogo").css("visibility", "hidden");
 
         if ( SIMULACAO ) {
             $("body").addClass('simulacaoTerminada');
@@ -118,7 +113,7 @@ function demonstrarSequencia ()
 }
 
 /* -------------------------------------------- pode ser em carater de SIMULACAO */
-function carregarProximaFase (/*habituacao = false*/)
+function carregarProximaFase ()
 {
     if ( SIMULACAO ) {
         let faseAtual = parseInt( pegarNumeroFase() );
@@ -129,10 +124,10 @@ function carregarProximaFase (/*habituacao = false*/)
     } else {
         $("body").addClass("venceu");
 
-console.log("-----------------");
-
-        var textToDisplay = 'getFraseSequencial(etapa)';
+        var textToDisplay = 'Vamos nessa!';
         type(textToDisplay);
+
+        $("#botaoSim").remove();
 
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().top
@@ -141,8 +136,6 @@ console.log("-----------------");
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().bottom
         }, 3000);
-
-
 
         let destino = "";
         let faseAtual = parseInt( pegarNumeroFase() );
@@ -232,6 +225,8 @@ function type (textToDisplay, INTERVAL=10)
     let $output = $(".typewriter");
     $output.empty(); //clear out the $output variable
 
+    $("#ancora").css('opacity', '0');
+
     let displayInt;
     textToDisplay = textToDisplay.split(' '); //split the text variable into an array
 
@@ -239,6 +234,7 @@ function type (textToDisplay, INTERVAL=10)
         let word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
         if (word == null) {
             // liberaBotaoNext();
+            $("#ancora").css('opacity', '1');
             return clearInterval(displayInt);
         } //if we're out of words to append
         $output.append(word + ' '); //else, add the word and then a space (.split(' ') will not carry over the spaces)

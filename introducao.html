@@ -34,6 +34,8 @@
                         ];
 
                         $("body").addClass('quadro-2');
+                        // typewrite();
+
 
                     } else if (bloco == 1) {
                         frases = [
@@ -41,20 +43,21 @@
                         ];
 
                         $("body").addClass('quadro-3');
+
                     } else if (bloco == 2) {
                         $("body").addClass('quadro-4');
                         $(".typewriter").addClass("invisivel");
-                    } else {
-                        window.location.href = "menu.html";
-                    }
-                    type('');
 
+                        let link = '<a href="menu.html" id="iniciarJogo">Iniciar</a>';
+                        $(".container").append(link);
+                        $("#ancora").remove();
+                    }
 
                     etapa = 0;
                     bloco++;
+                    typewrite();
                     return;
                 } else {
-                    console.log( textToDisplay );
                     type(textToDisplay);
                     etapa++;
                 }
@@ -99,7 +102,7 @@
             width: 800px;
         }
 
-        a {
+        #ancora {
             position: relative;
             /*top: 1224px;*/
             right: -90%;
@@ -109,8 +112,16 @@
             z-index: 10;
             display: block;
             background: url('assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
+            /*transition: 1s;*/
+            opacity: 0;
         }
 
+
+        #iniciarJogo {
+            font-size: 50px;
+            color: sienna;
+            text-decoration: none;
+        }
 
         body.quadro-2 { background-image: url('assets/imagens/introducao/intro-1.jpg'); }
         body.quadro-3 { background-image: url('assets/imagens/introducao/intro-2.jpg'); }
@@ -125,7 +136,6 @@
         <a href="menu.html" id="botaoFechar">X</a>
 
         <div class="typewriter"></div>
-
 
         <div id="containerBotoesConfirm" class="">
 

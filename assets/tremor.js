@@ -17,10 +17,3 @@ function iniciarTremor ()
         }
     }, 1000);
 }
-
-// function pararTremor ()
-// {
-//     if (typeof tremorInterval !== undefined) {
-//         clearInterval(tremorInterval);
-//     }
-// }
