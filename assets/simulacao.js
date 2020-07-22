@@ -1,3 +1,4 @@
+const SIMULATIONS_BEFORE_ERROR = 3;
 const SIMULACAO = true;
 
 var frases    = [
@@ -24,8 +25,6 @@ $(document).ready(function(){
 
 function simularSequencia ()
 {
-    const SIMULATIONS_BEFORE_ERROR = 2;
-
     for (let i=0; i<=sequencia.length-1; i++) {
         if (i == sequencia.length-1 && sequencia.length >= SIMULATIONS_BEFORE_ERROR) {
             introduzirErro = true;
