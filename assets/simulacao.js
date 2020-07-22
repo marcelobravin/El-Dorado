@@ -32,13 +32,14 @@ function simularSequencia ()
             introduzirErro = false;
         }
 
-        let x = 1;
+        let x = sequencia[i];
         if ( introduzirErro ) {
             while (x == sequencia[i]) {
                 x = getRandomInt(1, 4);
             }
         }
 
+        // console.log(x);
         setTimeout(function(){
             simularJogada(x)
         }, TEMPO *(i+1));

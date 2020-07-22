@@ -21,19 +21,21 @@ body.fase-4.venceu { background-image: url('../assets/imagens/fase-4/vitoria.png
 #resposta {
     color: black;
     line-height: 82px;
-    width: 100%;
+    font-size: 26px;
+    text-align: left;
+    text-indent: 424px;
+    text-shadow: 0 0 2px black;
 
     position: fixed;
 
+    top: 400px;
+    width: 800px;
     height: 109px;
     z-index: 9999999;
-    background: url('imagens/botoes/balao.jpeg') center center no-repeat;
-
-    font-size: 26px;
-    right: -338px;
-
-    top: 400px;
+    background: url('imagens/botoes/balao.png') center right no-repeat;
+    background-size: 420px 100px;
 }
+
 #resposta.acerto { color: lime; }
 #resposta.erro   { color: red; }
 

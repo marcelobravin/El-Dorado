@@ -1,8 +1,12 @@
-<!DOCTYPE html>
+<?php
+    include "controle/controle.php";
+
+    $recordes = getPontuacao();
+?><!DOCTYPE html>
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
-        <title>Créditos</title>
+        <title>Recordes</title>
 
         <!-- <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /> -->
         <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAPwr/ACbrDAAA6v8A8pIMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzMzMzAAIDMzMzMzBAAiAzMzMzBEACIgMzMzBEQAIiIDMzBERAAiIiAzBEREACIiIgBEREQAIiIiAERERAAiIiARBEREACIiAREQREQAIiAREREERAAiARERERBEACAREREREQQAAREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" rel="icon" type="image/x-icon" />
@@ -17,37 +21,6 @@
             }
             table { margin: 0 auto }
         </style>
-        <script type="text/javascript">
-            $(document).ready(function(){
-            // for (var i=1-; i>=0; i--) { // for each player
-
-                // sessionStorage.getItem('fase-'+i);
-                let score1 = sessionStorage.getItem('fase-1');
-                let score2 = sessionStorage.getItem('fase-2');
-                let score3 = sessionStorage.getItem('fase-3');
-                let score4 = sessionStorage.getItem('fase-4');
-/*
-                let score1 = sessionStorage.setItem('fase-1', '6');
-                let score2 = sessionStorage.setItem('fase-2', '8');
-                let score3 = sessionStorage.setItem('fase-3', '7');
-                let score4 = sessionStorage.setItem('fase-4', '6');
-*/
-                let trs = '<tr>';
-                    trs += '<td>Player</td>';
-                    trs += '<td>' +score1+ '</td>';
-                    trs += '<td>' +score2+ '</td>';
-                    trs += '<td>' +score3+ '</td>';
-                    trs += '<td>' +score4+ '</td>';
-                    trs += '<td>?</td>';
-                    trs += '</tr>';
-
-                    console.log(trs);
-
-                // $("body").append("trs");
-                $("tbody").html(trs);
-            // }
-            });
-        </script>
     </head>
     <body>
         <a href="menu.html">Voltar</a>
@@ -68,14 +41,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($recordes as $v): ?>
                     <tr>
-                        <td><!-- Nome --></td>
-                        <td><!-- Nível 1 --></td>
-                        <td><!-- Nível 2 --></td>
-                        <td><!-- Nível 3 --></td>
-                        <td><!-- Nível 4 --></td>
-                        <td><!-- Ouro --></td>
+                        <td><?php echo $v['nome'] ?></td>
+                        <td><?php echo $v['fase1'] ?></td>
+                        <td><?php echo $v['fase2'] ?></td>
+                        <td><?php echo $v['fase3'] ?></td>
+                        <td><?php echo $v['fase4'] ?></td>
+                        <td><?php echo $v['gold'] ?></td>
                     </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>
