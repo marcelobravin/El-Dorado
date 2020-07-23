@@ -9,7 +9,7 @@ function iniciarJogo ()
         $("body").addClass("simulacao");
     }
 
-    IncrementarSequencia();
+    incrementarSequencia();
     setTimeout(function(){
         demonstrarSequencia();
     }, TEMPO_INICIAR);
@@ -69,6 +69,8 @@ function errou ()
                 type("Eu não sou muito bom nisso...<br>Você está pronto?");
             } else {
                 type("Parabéns!<br>Você conseguiu!");
+                let stage = pegarNumeroFase();
+                registrarProgresso(stage, sequencia.length-1);
             }
         }, 3000);
     } else {
@@ -76,7 +78,7 @@ function errou ()
             setTimeout(function(){
                 passo = 0;
                 sequencia = [];
-                IncrementarSequencia();
+                incrementarSequencia();
                 demonstrarSequencia();
             }, INTERVALO);
         }, INTERVALO);
@@ -162,12 +164,12 @@ function carregarProximaSequencia ()
 
     passo = 0;
     setTimeout(function(){
-        IncrementarSequencia();
+        incrementarSequencia();
         demonstrarSequencia();
     }, INTERVALO);
 }
 
-function IncrementarSequencia ()
+function incrementarSequencia ()
 {
     let r = getRandomInt(1, 4);
     sequencia.push(r);
@@ -233,7 +235,6 @@ function type (textToDisplay, INTERVAL=10)
     displayInt = setInterval(function() {
         let word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
         if (word == null) {
-            // liberaBotaoNext();
             $("#ancora").css('opacity', '1');
             return clearInterval(displayInt);
         } //if we're out of words to append
@@ -269,4 +270,61 @@ function getRandomInt (min, max)
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function registrarProgresso (stage, score)
+{
+    localStorage.setItem("fase"+stage, score);
+
+    // if (true) {
+    if (stage == 5) {
+        /*let dadosJogador = localizarProgresso();*/
+        // console.log(dadosJogador);
+
+        var parametros = {
+            nome : localStorage.getItem("nome"),
+            fase1: localStorage.getItem("fase1"),
+            fase2: localStorage.getItem("fase2"),
+            fase3: localStorage.getItem("fase3"),
+            fase4: localStorage.getItem("fase4"),
+            fase5: localStorage.getItem("fase5"),
+        };
+
+        var request = $.ajax({
+            type       : 'POST',
+            url        : 'controle/insercao.php',
+            // dataType   : 'html',
+            data       : parametros,
+            beforeSend : function(xhr) {
+                xhr.overrideMimeType('text/plain; charset=x-user-defined');
+                $("body").append("<div id='ajaxLoader'></div>");
+            }
+        });
+
+        request.done(function(data) {
+            console.log(data);
+        });
+
+        request.fail(function(jqXHR, textStatus) {
+            console.log(jqXHR);
+            alert("Ocorreu uma falha na requisição ajax!");
+        });
+
+        request.always(function() {
+            $('#ajaxLoader').remove();
+        });
+    }
+}
+
+function localizarProgresso ()
+{
+    return [
+        localStorage.getItem("nome"),
+        localStorage.getItem("fase1"),
+        localStorage.getItem("fase2"),
+        localStorage.getItem("fase3"),
+        localStorage.getItem("fase4"),
+        localStorage.getItem("fase5"),
+        // localStorage.getItem("gold")
+    ]
 }

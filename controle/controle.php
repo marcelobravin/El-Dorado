@@ -6,10 +6,10 @@
     }
 
     if (AMBIENT == 'PRODUCTION') { # =========================================== SERVER
-        define( "SERVIDOR", "xxxxx");
-        define( "DBNAME"  , "xxxxx");
-        define( "USUARIO" , "xxxxx");
-        define( "SENHA"   , "xxxxx");
+        define( "SERVIDOR", "sql303.epizy.com");
+        define( "DBNAME"  , "epiz_25354541_phaser");
+        define( "USUARIO" , "epiz_25354541");
+        define( "SENHA"   , "azj3YFWhjgr3");
 
     } else { # ================================================================= LOCAL
         define( "SERVIDOR", "localhost");
@@ -67,7 +67,7 @@
             fase2,
             fase3,
             fase4,
-            gold
+            fase5
         ) VALUES (
             ?,
             ?,
@@ -85,7 +85,7 @@
         $stmt->bindValue(3, $post['fase2']);
         $stmt->bindValue(4, $post['fase3']);
         $stmt->bindValue(5, $post['fase4']);
-        $stmt->bindValue(6, $post['gold']);
+        $stmt->bindValue(6, $post['fase5']);
 
         $stmt->execute();
     }
@@ -105,17 +105,4 @@
 
         return $vc;
     }
-
-/*
-    $post = array(
-        'nome'   => 'zé',
-        'fase1'  => 5,
-        'fase2'  => 5,
-        'fase3'  => 5,
-        'fase4'  => 5,
-        'gold'   => 5
-    );
-
-    $id = insertPontuacao($post);
-*/
 ?>

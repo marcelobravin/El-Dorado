@@ -48,7 +48,7 @@
                         <td><?php echo $v['fase2'] ?></td>
                         <td><?php echo $v['fase3'] ?></td>
                         <td><?php echo $v['fase4'] ?></td>
-                        <td><?php echo $v['gold'] ?></td>
+                        <td><?php echo $v['fase5'] ?></td>
                     </tr>
                     <?php endforeach ?>
                 </tbody>
