@@ -103,7 +103,8 @@ function demonstrarSequencia ()
 
         setTimeout(function(){
             ativarBotao(x);
-        }, TEMPO *(i+1));
+        // }, TEMPO *(i+1));
+        }, TEMPO *(i+1) +INTERVALO);
 
         if ( i == sequencia.length-1  ) {
             setTimeout(function(){
@@ -177,6 +178,23 @@ function carregarProximaSequencia ()
         exibir("Acertou a sequência: "+ (sequencia.length) +"!", "acerto");
     }
 
+
+    //rate
+    // audios['BGM'].loop = true;
+    // audios['BGM'].play();
+
+    // if ( audios['BGM'].isPlaying ) {
+        audios['BGM'].pause();
+        let x = sequencia.length /10;
+        // console.log(x);
+        audios['BGM'].playbackRate = 1 + x;
+        audios['BGM'].play();
+
+        INTERVALO -= 100;/* * sequencia.length*/
+        TEMPO     -= 50;
+        console.log(INTERVALO);
+    // }
+
     passo = 0;
     setTimeout(function(){
         incrementarSequencia();
@@ -189,7 +207,7 @@ function incrementarSequencia ()
     let r = getRandomInt(1, 4);
     sequencia.push(r);
 
-    let DEBUG = false;
+    let DEBUG = true;
     if (DEBUG) {
         $("#tamanhoSequencia").val(sequencia.length);
         $("#sequencia").val(sequencia);
