@@ -39,7 +39,6 @@ function simularSequencia ()
             }
         }
 
-        // console.log(x);
         setTimeout(function(){
             simularJogada(x)
         }, TEMPO *(i+1));
@@ -48,7 +47,7 @@ function simularSequencia ()
 
 function simularJogada (x)
 {
-    const ICONE_MAO = '<img id="hand" src="assets/imagens/mão para clicar.png">';
+    const ICONE_MAO = '<img id="hand" src="assets/imagens/mão para clicar.png" style="z-index=9999; position: absolute">';
 
     $("#hand").remove();
     $(".botao[data-numero="+ x +"]").append(ICONE_MAO);
@@ -57,7 +56,7 @@ function simularJogada (x)
         ativarBotao(x);
         setTimeout(function(){
             $("#hand").remove();
-            $("#debug").append(ICONE_MAO);
+            $("#palcoJogo").append(ICONE_MAO);
         }, TEMPO/2 -50);
     }, TEMPO/2 -50);
 }

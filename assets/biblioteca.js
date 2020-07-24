@@ -55,7 +55,9 @@ function errou ()
         if ( SIMULACAO ) {
             $("body").addClass('simulacaoTerminada');
         } else {
-            $("body").addClass("venceu");
+            // setTimeout(function(){
+                $("body").addClass("venceu");
+            // }, 1000);
         }
 
         if (typeof tremorInterval != 'undefined') {
@@ -63,14 +65,19 @@ function errou ()
         }
 
         setTimeout(function(){
-            $("#containerBotoesConfirm").removeClass("invisivel");
 
             if ( SIMULACAO ) {
-                type("Eu não sou muito bom nisso...<br>Você está pronto?");
+                type("Eu não sou muito bom nisso...\n\rVocê está pronto?");
+                setTimeout(function(){
+                    $("#containerBotoesConfirm").removeClass("invisivel");
+                }, 3000);
             } else {
-                type("Parabéns!<br>Você conseguiu!");
+                type("Parabéns!\n\rVocê conseguiu!");
                 let stage = pegarNumeroFase();
                 registrarProgresso(stage, sequencia.length-1);
+                setTimeout(function(){
+                    carregarProximaFase();
+                }, 3000);
             }
         }, 3000);
     } else {
@@ -88,7 +95,7 @@ function errou ()
 /* -------------------------------------------- pode ser em carater de SIMULACAO */
 function demonstrarSequencia ()
 {
-    exibir("Memorize...");
+    exibir("Observe...");
     FSM = 'watch';
 
     for (var i=0; i<=sequencia.length-1; i++) {
@@ -103,10 +110,10 @@ function demonstrarSequencia ()
                 FSM = 'play';
 
                 if ( SIMULACAO ) {
-                    exibir("Vou jogar, observe...");
+                    exibir("Vou tentar...");
                     simularSequencia();
                 } else {
-                    exibir("Sua vez");
+                    exibir("Sua vez!");
                     $("body").removeClass("simulacao");
                 }
             }, TEMPO *(i+1) +INTERVALO);
@@ -127,9 +134,16 @@ function carregarProximaFase ()
         $("body").addClass("venceu");
 
         var textToDisplay = 'Vamos nessa!';
+
+        let faseAtual2 = parseInt( pegarNumeroFase() );
+        if (faseAtual2 >= 4 ) {
+            textToDisplay = "- Agora preciso que você mantenha a ponte abaixada para que eu busque o ouro para nós."
+        }
+
         type(textToDisplay);
 
-        $("#botaoSim").remove();
+        // $("#botaoSim").remove();
+        // $("#ancora").remove();
 
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().top
@@ -146,7 +160,8 @@ function carregarProximaFase ()
             let proximaFase = faseAtual+1;
             destino = "habituacao-"+ proximaFase +".html";
         } else {
-            destino = "fim.html";
+            // destino = "fim.html";
+            destino = "fase-5.html";
         }
         $(".container").append('<a id="next" href="'+ destino +'">Próxima Fase</a>');
     }
@@ -174,11 +189,14 @@ function incrementarSequencia ()
     let r = getRandomInt(1, 4);
     sequencia.push(r);
 
-    $("#tamanhoSequencia").val(sequencia.length);
-    $("#sequencia").val(sequencia);
-    $("#passo").val(passo+1 + "º");
-    if ( sequencia.length > PASSOS_VITORIA ) {
-        $("#tamanhoSequencia").val(sequencia.length).css('background', 'lime');
+    let DEBUG = false;
+    if (DEBUG) {
+        $("#tamanhoSequencia").val(sequencia.length);
+        $("#sequencia").val(sequencia);
+        $("#passo").val(passo+1 + "º");
+        if ( sequencia.length > PASSOS_VITORIA ) {
+            $("#tamanhoSequencia").val(sequencia.length).css('background', 'lime');
+        }
     }
 }
 
@@ -222,23 +240,23 @@ function ativarBotao (numeroClicado)
     }
 }
 
-function type (textToDisplay, INTERVAL=10)
+function type (textToDisplay, INTERVAL=50)
 {
     let $output = $(".typewriter");
     $output.empty(); //clear out the $output variable
 
-    $("#ancora").css('opacity', '0');
+    $("#ancora").css('display', 'none');
 
     let displayInt;
-    textToDisplay = textToDisplay.split(' '); //split the text variable into an array
+    textToDisplay = textToDisplay.split(''); //split the text variable into an array
 
     displayInt = setInterval(function() {
         let word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
         if (word == null) {
-            $("#ancora").css('opacity', '1');
+            $("#ancora").css('display', 'block');
             return clearInterval(displayInt);
         } //if we're out of words to append
-        $output.append(word + ' '); //else, add the word and then a space (.split(' ') will not carry over the spaces)
+        $output.append(word + ''); //else, add the word and then a space (.split(' ') will not carry over the spaces)
     }, INTERVAL); //setInterval is delayed 300ms, so a word will be added every 300ms
 }
 

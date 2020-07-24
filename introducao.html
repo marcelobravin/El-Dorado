@@ -15,7 +15,6 @@
             "- Existe uma lenda de uma cidade perdida."
             , "- Totalmente feita de ouro puro e com tesouros inimagináveis."
             , "- Muitos exploradores tentaram achá-la,  porém nenhum conseguiu."
-            , "- Até hoje!"
         ];
 
         $(document).ready(function(){
@@ -28,29 +27,39 @@
 
                     if (bloco == 0) {
                         frases = [
+                            "- Até hoje!"
+                        ];
+
+
+                    } else if (bloco == 1) {
+                        $("body").addClass('quadro-1');
+                        $(".typewriter").addClass("invisivel");
+                    } else if (bloco == 2) {
+                        $(".typewriter").removeClass("invisivel");
+                        frases = [
                             "- Olá aventureiro, eu me chamo Ariel, que bom que você chegou para me ajudar!"
                             , "- Estamos próximos de descobrir a cidade mais procurada de todos os tempos, eu tenho certeza disso."
                             , "- Vamos! Este é o caminho."
                         ];
 
                         $("body").addClass('quadro-2');
-                        // typewrite();
 
-
-                    } else if (bloco == 1) {
+                    } else if (bloco == 3) {
                         frases = [
                             "- Veja, lá está a pirâmide, com certeza ela é a entrada para a cidade de ouro El-Dorado."
                         ];
 
                         $("body").addClass('quadro-3');
 
-                    } else if (bloco == 2) {
-                        $("body").addClass('quadro-4');
+                    } else if (bloco == 4) {
+                        /*$("body").addClass('quadro-4');
                         $(".typewriter").addClass("invisivel");
 
                         let link = '<a href="menu.html" id="iniciarJogo">Iniciar</a>';
                         $(".container").append(link);
-                        $("#ancora").remove();
+                        $("#ancora").remove();*/
+
+                        window.location.href = "menu.html";
                     }
 
                     etapa = 0;
@@ -90,43 +99,7 @@
         }
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
-    <style type="text/css">
-        body {
-            background-image: url('assets/imagens/introducao/intro-0.jpg');
-            background-position-y: -8px;
-        }
-
-        #containerBotoesConfirm {
-            position: absolute;
-            text-align: right;
-            width: 800px;
-        }
-
-        #ancora {
-            position: relative;
-            /*top: 1224px;*/
-            right: -90%;
-            height: 44px;
-            width: 39px;
-            color: transparent;
-            z-index: 10;
-            display: block;
-            background: url('assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
-            /*transition: 1s;*/
-            opacity: 0;
-        }
-
-
-        #iniciarJogo {
-            font-size: 50px;
-            color: sienna;
-            text-decoration: none;
-        }
-
-        body.quadro-2 { background-image: url('assets/imagens/introducao/intro-1.jpg'); }
-        body.quadro-3 { background-image: url('assets/imagens/introducao/intro-2.jpg'); }
-        body.quadro-4 { background-image: url('assets/imagens/introducao/intro-3.jpg'); }
-    </style>
+    <link rel="stylesheet" type="text/css" href="assets/introducao.css">
 </head>
 
 <body>

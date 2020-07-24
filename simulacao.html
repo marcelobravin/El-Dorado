@@ -38,18 +38,16 @@
 
         #hand {
             position: absolute;
-            z-index: 9;
-            display: block;
+            margin-left: -35px;
         }
 
-        /*body.simulacaoTerminada.fase-1 { background-image: url('assets/imagens/habituacao-1/0.png'); }*/
         body.simulacaoTerminada.fase-1 { background-image: url('assets/imagens/habituacao-1/0.jpg'); }
         body.simulacaoTerminada.fase-2 { background-image: url('assets/imagens/habituacao-2/0.png'); }
         body.simulacaoTerminada.fase-3 { background-image: url('assets/imagens/habituacao-3/0.png'); }
         body.simulacaoTerminada.fase-4 { background-image: url('assets/imagens/habituacao-4/0.png'); }
 
         body.simulacaoTerminada { background-position-y: -8px; }
-        body.simulacaoTerminada.shake { background-position-y: 0px; }
+        /*body.simulacaoTerminada.shake { background-position-y: 0px; }*/
     </style>
     <script type="text/javascript">
         var comSE  = false;
@@ -98,6 +96,9 @@
             </div>
             <br>
 
+            <img id="hand" src="assets/imagens/mão para clicar.png">
+
+<!--
             <div id="debug">
                 <input value="..." id="tamanhoSequencia">
                 <br>
@@ -107,8 +108,7 @@
                 <br>
                 <a id="sound" style="color:red">BGM</a>
                 <br>
-                <img id="hand" src="assets/imagens/mão para clicar.png">
-            </div>
+            </div> -->
 
         </div>
 

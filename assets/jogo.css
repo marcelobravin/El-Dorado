@@ -1,5 +1,7 @@
 html { background-color: black }
 body { background: center bottom no-repeat black; }
+::selection { background-color: transparent}
+
 
 body.fase-1 { background-image: url('../assets/imagens/fase-1/0.png') }
 body.fase-2 { background-image: url('../assets/imagens/fase-2/0.png') }
@@ -18,7 +20,7 @@ body.fase-5.venceu { background-image: url('../assets/imagens/fase-5/vitoria.png
 #tamanhoSequencia,
 #passo { text-align: center }
 
-.shake #resposta { top: 405px; }
+/*.shake #resposta { top: 385px; }*/
 #resposta {
     color: black;
     line-height: 82px;
@@ -37,7 +39,7 @@ body.fase-5.venceu { background-image: url('../assets/imagens/fase-5/vitoria.png
     background-size: 420px 100px;
 }
 
-#resposta.acerto { color: lime; }
+#resposta.acerto { color: #20C220; }
 #resposta.erro   { color: red; }
 
 
@@ -51,13 +53,16 @@ body.fase-5.venceu { background-image: url('../assets/imagens/fase-5/vitoria.png
     height: 141px;
     display: inline-block;
     color: transparent;
+    /*z-index: 1;*/
+    margin: -10px 0 65px 0px;
 }
+
 body:not(.simulacao) .botao:hover { cursor: pointer;}
 
-#vermelho { opacity: .8; background: url('../imagens/botoes/botao1.png') /*red*/    }
-#azul     { opacity: .8; background: url('../imagens/botoes/botao2.png') /*blue*/   }
-#verde    { opacity: .8; background: url('../imagens/botoes/botao3.png') /*green*/  }
-#amarelo  { opacity: .8; background: url('../imagens/botoes/botao4.png') /*yellow*/ }
+#vermelho { opacity: .8; background: url('imagens/botoes/botao1.png') /*red*/    }
+#azul     { opacity: .8; background: url('imagens/botoes/botao2.png') /*blue*/   }
+#verde    { opacity: .8; background: url('imagens/botoes/botao3.png') /*green*/  }
+#amarelo  { opacity: .8; background: url('imagens/botoes/botao4.png') /*yellow*/ }
 
 #vermelho.ativo, body:not(.simulacao) #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
 #azul.ativo    , body:not(.simulacao) #azul:active     { background-image: url('../imagens/botoes/botao2 iluminado.png') }
@@ -140,3 +145,6 @@ a#next {
     text-shadow: 0px 0px 3px white;
     z-index: 1;
 }
+
+
+#debug { visibility: hidden; }

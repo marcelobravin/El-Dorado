@@ -1,0 +1,37 @@
+body {
+    background-image: url('imagens/introducao/intro-0.jpg');
+    background-position-y: -8px;
+}
+
+#containerBotoesConfirm {
+    position: absolute;
+    text-align: right;
+    width: 800px;
+}
+
+#ancora {
+    position: relative;
+    /*top: 1224px;*/
+    right: -90%;
+    height: 44px;
+    width: 39px;
+    color: transparent;
+    z-index: 10;
+    display: block;
+    background: url('imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
+    /*transition: 1s;*/
+    /*opacity: 0;*/
+    display: none;
+}
+
+
+#iniciarJogo {
+    font-size: 50px;
+    color: sienna;
+    text-decoration: none;
+}
+
+body.quadro-1 { background-image: url('imagens/introducao/intro-3.jpg'); }
+body.quadro-2 { background-image: url('imagens/introducao/intro-1.jpg'); }
+body.quadro-3 { background-image: url('imagens/introducao/intro-2.jpg'); }
+/*body.quadro-4 { background-image: url('imagens/introducao/intro-3.jpg'); }*/
