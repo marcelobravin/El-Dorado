@@ -55,9 +55,10 @@ function errou ()
         if ( SIMULACAO ) {
             $("body").addClass('simulacaoTerminada');
         } else {
-            // setTimeout(function(){
-                $("body").addClass("venceu");
-            // }, 1000);
+            $("body").addClass("venceu");
+            $(".container").append('<span id="contadorPontuacao">'+(sequencia.length-1)+'</span>');
+
+            console.log("record desse jogador nessa fase???");
         }
 
         if (typeof tremorInterval != 'undefined') {
@@ -72,6 +73,7 @@ function errou ()
                     $("#containerBotoesConfirm").removeClass("invisivel");
                 }, 3000);
             } else {
+
                 type("Parabéns!\n\rVocê conseguiu!");
                 let stage = pegarNumeroFase();
                 registrarProgresso(stage, sequencia.length-1);
@@ -143,9 +145,6 @@ function carregarProximaFase ()
 
         type(textToDisplay);
 
-        // $("#botaoSim").remove();
-        // $("#ancora").remove();
-
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().top
         }, 10);
@@ -161,7 +160,6 @@ function carregarProximaFase ()
             let proximaFase = faseAtual+1;
             destino = "habituacao-"+ proximaFase +".html";
         } else {
-            // destino = "fim.html";
             destino = "fase-5.html";
         }
         $(".container").append('<a id="next" href="'+ destino +'">Próxima Fase</a>');
@@ -178,22 +176,16 @@ function carregarProximaSequencia ()
         exibir("Acertou a sequência: "+ (sequencia.length) +"!", "acerto");
     }
 
-
-    //rate
-    // audios['BGM'].loop = true;
-    // audios['BGM'].play();
-
-    // if ( audios['BGM'].isPlaying ) {
+    if ( !audios['BGM'].paused ) {
         audios['BGM'].pause();
         let x = sequencia.length /10;
-        // console.log(x);
         audios['BGM'].playbackRate = 1 + x;
         audios['BGM'].play();
 
         INTERVALO -= 100;/* * sequencia.length*/
         TEMPO     -= 50;
         console.log(INTERVALO);
-    // }
+    }
 
     passo = 0;
     setTimeout(function(){
@@ -206,8 +198,8 @@ function incrementarSequencia ()
 {
     let r = getRandomInt(1, 4);
     sequencia.push(r);
-
-    let DEBUG = true;
+/*
+    let DEBUG = false;
     if (DEBUG) {
         $("#tamanhoSequencia").val(sequencia.length);
         $("#sequencia").val(sequencia);
@@ -216,6 +208,7 @@ function incrementarSequencia ()
             $("#tamanhoSequencia").val(sequencia.length).css('background', 'lime');
         }
     }
+*/
 }
 
 function exibir (mensagem, tipoMensagem='')
@@ -312,10 +305,8 @@ function registrarProgresso (stage, score)
 {
     localStorage.setItem("fase"+stage, score);
 
-    // if (true) {
     if (stage == 5) {
         /*let dadosJogador = localizarProgresso();*/
-        // console.log(dadosJogador);
 
         var parametros = {
             nome : localStorage.getItem("nome"),
@@ -361,6 +352,5 @@ function localizarProgresso ()
         localStorage.getItem("fase3"),
         localStorage.getItem("fase4"),
         localStorage.getItem("fase5"),
-        // localStorage.getItem("gold")
     ]
 }

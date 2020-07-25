@@ -108,7 +108,8 @@ body:not(.simulacao) #amarelo:hover {
 a#next {
     position: absolute;
     top: 1206px;
-    right: 322px;
+    /*right: 322px;*/
+    right: 42px;
     height: 44px;
     width: 39px;
     color: transparent;
@@ -116,10 +117,6 @@ a#next {
     display: block;
     background: url('../assets/imagens/botoes/seta para próxima caixa de texto.png') center center no-repeat;
     visibility: visible;
-
-
-    /*top: 230px;*/
-    /*right: -750px;*/
 }
 
 
@@ -144,4 +141,14 @@ a#next {
     font-family: arial;
     text-shadow: 0px 0px 3px white;
     z-index: 1;
+}
+
+#contadorPontuacao {
+    font-size: 100px;
+    text-shadow: 0 0 2px black;
+    color: white;
+    position: absolute;
+    top: 100px;
+    margin-left: 70px;
+    font-weight: bold;
 }
