@@ -1,7 +1,7 @@
 var   TEMPO          = 1000; // min 700, tempo do som, senão buga quando toca o mesmo duas vezes seguidas
 var   INTERVALO      = 2000;
 const TEMPO_INICIAR  = 1000;
-const PASSOS_VITORIA = 0;
+const PASSOS_VITORIA = 5;
 
 var FSM       = '';
 var sequencia = [];

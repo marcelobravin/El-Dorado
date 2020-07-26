@@ -1,7 +1,5 @@
 function iniciarJogo ()
 {
-    let estagio = pegarNumeroFase();
-
     if ( comBGM ) {
         audios['BGM'].loop = true;
         audios['BGM'].play();
@@ -16,37 +14,39 @@ function iniciarJogo ()
         demonstrarSequencia();
     }, TEMPO_INICIAR);
 
+    if ( !SIMULACAO ) {
+        let estagio = pegarNumeroFase();
+        var parametros = {
+          nome   : localStorage.getItem('nome'),
+          estagio: estagio
+        };
 
-    var parametros = {
-      nome   : localStorage.getItem('nome'),
-      estagio: estagio
-    };
+        var request = $.ajax({
+            type: 'GET',
+            url: 'controle/buscaRecorde.php',
+            // dataType: 'html',
+            data: parametros,
+            beforeSend: function(xhr) {
+                xhr.overrideMimeType('text/plain; charset=x-user-defined');
+                $("body").append("<div id='ajaxLoader'></div>");
+                localStorage.setItem('record'+estagio, 0);
+            }
+        });
 
-    var request = $.ajax({
-        type: 'GET',
-        url: 'controle/buscaRecorde.php',
-        // dataType: 'html',
-        data: parametros,
-        beforeSend: function(xhr) {
-            xhr.overrideMimeType('text/plain; charset=x-user-defined');
-            $("body").append("<div id='ajaxLoader'></div>");
-            localStorage.setItem('record'+estagio, 0);
-        }
-    });
+        request.done(function(data) {
+            // console.log(data);
+            localStorage.setItem('record'+estagio, data);
+        });
 
-    request.done(function(data) {
-        console.log(data);
-        localStorage.setItem('record'+estagio, data);
-    });
+        request.fail(function(jqXHR, textStatus) {
+            console.log(jqXHR);
+            alert("Ocorreu uma falha na requisição ajax!");
+        });
 
-    request.fail(function(jqXHR, textStatus) {
-        console.log(jqXHR);
-        alert("Ocorreu uma falha na requisição ajax!");
-    });
-
-    request.always(function() {
-        $('#ajaxLoader').remove();
-    });
+        request.always(function() {
+            $('#ajaxLoader').remove();
+        });
+    }
 }
 
 function acertou ()
@@ -162,8 +162,7 @@ function demonstrarSequencia ()
 function carregarProximaFase ()
 {
     if ( SIMULACAO ) {
-        let faseAtual = parseInt( pegarNumeroFase() );
-        destino = "fase-"+ faseAtual +".html";
+        destino = "fase-"+ pegarNumeroFase() +".html";
         setTimeout(function(){
             window.location.href = destino;
         }, 2000);
@@ -172,8 +171,7 @@ function carregarProximaFase ()
 
         var textToDisplay = 'Vamos nessa!';
 
-        let faseAtual2 = parseInt( pegarNumeroFase() );
-        if (faseAtual2 >= 4 ) {
+        if (pegarNumeroFase() >= 4 ) {
             textToDisplay = "- Agora preciso que você mantenha a ponte abaixada para que eu busque o ouro para nós."
         }
 
@@ -188,7 +186,7 @@ function carregarProximaFase ()
         }, 3000);
 
         let destino = "";
-        let faseAtual = parseInt( pegarNumeroFase() );
+        let faseAtual = pegarNumeroFase();
         sessionStorage.setItem('fase-'+faseAtual, sequencia.length);
         if (faseAtual < 4) {
             let proximaFase = faseAtual+1;
@@ -218,7 +216,6 @@ function carregarProximaSequencia ()
 
         INTERVALO -= 100;/* * sequencia.length*/
         TEMPO     -= 50;
-        // console.log(INTERVALO);
     }
 
     passo = 0;
@@ -232,17 +229,6 @@ function incrementarSequencia ()
 {
     let r = getRandomInt(1, 4);
     sequencia.push(r);
-/*
-    let DEBUG = false;
-    if (DEBUG) {
-        $("#tamanhoSequencia").val(sequencia.length);
-        $("#sequencia").val(sequencia);
-        $("#passo").val(passo+1 + "º");
-        if ( sequencia.length > PASSOS_VITORIA ) {
-            $("#tamanhoSequencia").val(sequencia.length).css('background', 'lime');
-        }
-    }
-*/
 }
 
 function exibir (mensagem, tipoMensagem='')
@@ -322,10 +308,12 @@ function getFraseSequencial (n)
 
 function pegarNumeroFase ()
 {
-    const f = window.location.href;
-    let x = f.split('-');
-    let numero = x[1][0];
-    return parseInt(numero);
+    // if (!SIMULACAO) {
+        const f = window.location.href;
+        let x = f.split('-');
+        let numero = x[1][0];
+        return parseInt(numero);
+    // }
 }
 
 function getRandomInt (min, max)

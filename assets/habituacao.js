@@ -7,7 +7,7 @@ $(document).ready(function(){
         var textToDisplay = getFraseSequencial(etapa);
 
         if (textToDisplay == -1) {
-            let faseAtual = parseInt( pegarNumeroFase() );
+            let faseAtual = pegarNumeroFase();
             window.location.href = "simulacao.html?=" + faseAtual;
             return;
 
