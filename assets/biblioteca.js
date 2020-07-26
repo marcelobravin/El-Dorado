@@ -1,5 +1,7 @@
 function iniciarJogo ()
 {
+    let estagio = pegarNumeroFase();
+
     if ( comBGM ) {
         audios['BGM'].loop = true;
         audios['BGM'].play();
@@ -13,6 +15,38 @@ function iniciarJogo ()
     setTimeout(function(){
         demonstrarSequencia();
     }, TEMPO_INICIAR);
+
+
+    var parametros = {
+      nome   : localStorage.getItem('nome'),
+      estagio: estagio
+    };
+
+    var request = $.ajax({
+        type: 'GET',
+        url: 'controle/buscaRecorde.php',
+        // dataType: 'html',
+        data: parametros,
+        beforeSend: function(xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+            $("body").append("<div id='ajaxLoader'></div>");
+            localStorage.setItem('record'+estagio, 0);
+        }
+    });
+
+    request.done(function(data) {
+        console.log(data);
+        localStorage.setItem('record'+estagio, data);
+    });
+
+    request.fail(function(jqXHR, textStatus) {
+        console.log(jqXHR);
+        alert("Ocorreu uma falha na requisição ajax!");
+    });
+
+    request.always(function() {
+        $('#ajaxLoader').remove();
+    });
 }
 
 function acertou ()
@@ -57,8 +91,8 @@ function errou ()
         } else {
             $("body").addClass("venceu");
             $(".container").append('<span id="contadorPontuacao">'+(sequencia.length-1)+'</span>');
-
-            console.log("record desse jogador nessa fase???");
+            let estagio = pegarNumeroFase();
+            $(".container").append('<span id="contadorRecord">'+ localStorage.getItem('record'+estagio) +'</span>');
         }
 
         if (typeof tremorInterval != 'undefined') {
@@ -75,8 +109,8 @@ function errou ()
             } else {
 
                 type("Parabéns!\n\rVocê conseguiu!");
-                let stage = pegarNumeroFase();
-                registrarProgresso(stage, sequencia.length-1);
+                let estagio = pegarNumeroFase();
+                registrarProgresso(estagio, sequencia.length-1);
                 setTimeout(function(){
                     carregarProximaFase();
                 }, 3000);
@@ -184,7 +218,7 @@ function carregarProximaSequencia ()
 
         INTERVALO -= 100;/* * sequencia.length*/
         TEMPO     -= 50;
-        console.log(INTERVALO);
+        // console.log(INTERVALO);
     }
 
     passo = 0;
@@ -301,11 +335,12 @@ function getRandomInt (min, max)
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function registrarProgresso (stage, score)
+function registrarProgresso (fase, pontuacao)
 {
-    localStorage.setItem("fase"+stage, score);
+    localStorage.setItem("fase"+fase, pontuacao);
+    localStorage.setItem("atual", fase)
 
-    if (stage == 5) {
+    // if (fase == 5) {
         /*let dadosJogador = localizarProgresso();*/
 
         var parametros = {
@@ -315,6 +350,7 @@ function registrarProgresso (stage, score)
             fase3: localStorage.getItem("fase3"),
             fase4: localStorage.getItem("fase4"),
             fase5: localStorage.getItem("fase5"),
+            atual: localStorage.getItem("atual")
         };
 
         var request = $.ajax({
@@ -340,7 +376,7 @@ function registrarProgresso (stage, score)
         request.always(function() {
             $('#ajaxLoader').remove();
         });
-    }
+    // }
 }
 
 function localizarProgresso ()

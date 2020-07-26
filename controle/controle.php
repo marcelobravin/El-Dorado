@@ -59,45 +59,65 @@
         return $dbh;
     }
 
-    function insertPontuacao ($post)
+    function inserirPontuacao ($post)
     {
-        $sql = "INSERT INTO pontuacoes (
-            nome,
-            fase1,
-            fase2,
-            fase3,
-            fase4,
-            fase5
-        ) VALUES (
-            ?,
-            ?,
-            ?,
-            ?,
-            ?,
-            ?
-        )";
+        $sql = "INSERT INTO pontuacoes (nome, fase1) VALUES (?, ?)";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);
 
         $stmt->bindValue(1, $post['nome']);
         $stmt->bindValue(2, $post['fase1']);
-        $stmt->bindValue(3, $post['fase2']);
-        $stmt->bindValue(4, $post['fase3']);
-        $stmt->bindValue(5, $post['fase4']);
-        $stmt->bindValue(6, $post['fase5']);
+        // $stmt->bindValue(3, $post['fase2']);
+        // $stmt->bindValue(4, $post['fase3']);
+        // $stmt->bindValue(5, $post['fase4']);
+        // $stmt->bindValue(6, $post['fase5']);
 
-        $stmt->execute();
+        return $stmt->execute();
     }
 
-    function getPontuacao ($playerId=0)
+    function atualizarPontuacao ($post)
     {
-        $sql = "SELECT * FROM pontuacoes";
-//        $sql = "SELECT * FROM pontuacoes WHERE player_id = ?";
+        $sql = "
+            UPDATE pontuacoes
+            SET fase{$post['atual']} = ?
+            WHERE
+                nome = ?
+                AND fase{$post['atual']} < ?
+        ";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);
-        // $stmt->bindValue(1, $playerId);
+
+        $indice = 'fase'.$post['atual'];
+        $stmt->bindValue(1, $post[ $indice ]);
+        $stmt->bindValue(2, $post['nome']);
+        $stmt->bindValue(3, $post[ $indice ]);
+
+        return $stmt->execute();
+    }
+
+    function getPontuacoes ()
+    {
+        $sql = "SELECT * FROM pontuacoes";
+
+        $con = conectarPdo();
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+
+        $vc = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $con = null;
+
+        return $vc;
+    }
+
+    function getPontuacao ($nome='')
+    {
+       $sql = "SELECT * FROM pontuacoes WHERE nome = ?";
+
+        $con = conectarPdo();
+        $stmt = $con->prepare($sql);
+        $stmt->bindValue(1, $nome);
         $stmt->execute();
 
         $vc = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -1,7 +1,7 @@
 <?php
     include "controle/controle.php";
 
-    $recordes = getPontuacao();
+    $recordes = getPontuacoes();
 ?><!DOCTYPE html>
 <html lang="pt-BR">
     <head>

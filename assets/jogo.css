@@ -64,10 +64,10 @@ body:not(.simulacao) .botao:hover { cursor: pointer;}
 #verde    { opacity: .8; background: url('imagens/botoes/botao3.png') /*green*/  }
 #amarelo  { opacity: .8; background: url('imagens/botoes/botao4.png') /*yellow*/ }
 
-#vermelho.ativo, body:not(.simulacao) #vermelho:active { background-image: url('../imagens/botoes/botao1 iluminado.png') }
-#azul.ativo    , body:not(.simulacao) #azul:active     { background-image: url('../imagens/botoes/botao2 iluminado.png') }
-#verde.ativo   , body:not(.simulacao) #verde:active    { background-image: url('../imagens/botoes/botao3 iluminado.png') }
-#amarelo.ativo , body:not(.simulacao) #amarelo:active  { background-image: url('../imagens/botoes/botao4 iluminado.png') }
+#vermelho.ativo, body:not(.simulacao) #vermelho:active { background-image: url('imagens/botoes/botao1 iluminado.png') }
+#azul.ativo    , body:not(.simulacao) #azul:active     { background-image: url('imagens/botoes/botao2 iluminado.png') }
+#verde.ativo   , body:not(.simulacao) #verde:active    { background-image: url('imagens/botoes/botao3 iluminado.png') }
+#amarelo.ativo , body:not(.simulacao) #amarelo:active  { background-image: url('imagens/botoes/botao4 iluminado.png') }
 
 body:not(.simulacao) #vermelho:hover,
 body:not(.simulacao) #azul:hover    ,
@@ -149,6 +149,16 @@ a#next {
     color: white;
     position: absolute;
     top: 100px;
+    margin-left: 70px;
+    font-weight: bold;
+}
+
+#contadorRecord {
+    font-size: 100px;
+    text-shadow: 0 0 2px black;
+    color: white;
+    position: absolute;
+    top: 0px;
     margin-left: 70px;
     font-weight: bold;
 }
