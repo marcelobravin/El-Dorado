@@ -227,7 +227,7 @@ function carregarProximaSequencia ()
 
 function incrementarSequencia ()
 {
-    let r = getRandomInt(1, 4);
+    let r = getRandomInt(1, 5);
     sequencia.push(r);
 }
 

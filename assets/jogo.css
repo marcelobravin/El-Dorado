@@ -39,8 +39,8 @@ body.fase-5.venceu { background-image: url('../assets/imagens/fase-5/vitoria.png
     background-size: 420px 100px;
 }
 
-#resposta.acerto { color: #20C220; }
-#resposta.erro   { color: red; }
+#resposta.acerto { color: #10B210; }
+#resposta.erro   { color: blue; }
 
 
 
