@@ -308,12 +308,10 @@ function getFraseSequencial (n)
 
 function pegarNumeroFase ()
 {
-    // if (!SIMULACAO) {
-        const f = window.location.href;
-        let x = f.split('-');
-        let numero = x[1][0];
-        return parseInt(numero);
-    // }
+    const f = window.location.href;
+    let x = f.split('-');
+    let numero = x[1][0];
+    return parseInt(numero);
 }
 
 function getRandomInt (min, max)
@@ -328,43 +326,39 @@ function registrarProgresso (fase, pontuacao)
     localStorage.setItem("fase"+fase, pontuacao);
     localStorage.setItem("atual", fase)
 
-    // if (fase == 5) {
-        /*let dadosJogador = localizarProgresso();*/
+    var parametros = {
+        nome : localStorage.getItem("nome"),
+        fase1: localStorage.getItem("fase1"),
+        fase2: localStorage.getItem("fase2"),
+        fase3: localStorage.getItem("fase3"),
+        fase4: localStorage.getItem("fase4"),
+        fase5: localStorage.getItem("fase5"),
+        atual: localStorage.getItem("atual")
+    };
 
-        var parametros = {
-            nome : localStorage.getItem("nome"),
-            fase1: localStorage.getItem("fase1"),
-            fase2: localStorage.getItem("fase2"),
-            fase3: localStorage.getItem("fase3"),
-            fase4: localStorage.getItem("fase4"),
-            fase5: localStorage.getItem("fase5"),
-            atual: localStorage.getItem("atual")
-        };
+    var request = $.ajax({
+        type       : 'POST',
+        url        : 'controle/insercao.php',
+        // dataType   : 'html',
+        data       : parametros,
+        beforeSend : function(xhr) {
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
+            $("body").append("<div id='ajaxLoader'></div>");
+        }
+    });
 
-        var request = $.ajax({
-            type       : 'POST',
-            url        : 'controle/insercao.php',
-            // dataType   : 'html',
-            data       : parametros,
-            beforeSend : function(xhr) {
-                xhr.overrideMimeType('text/plain; charset=x-user-defined');
-                $("body").append("<div id='ajaxLoader'></div>");
-            }
-        });
+    request.done(function(data) {
+        console.log(data);
+    });
 
-        request.done(function(data) {
-            console.log(data);
-        });
+    request.fail(function(jqXHR, textStatus) {
+        console.log(jqXHR);
+        alert("Ocorreu uma falha na requisição ajax!");
+    });
 
-        request.fail(function(jqXHR, textStatus) {
-            console.log(jqXHR);
-            alert("Ocorreu uma falha na requisição ajax!");
-        });
-
-        request.always(function() {
-            $('#ajaxLoader').remove();
-        });
-    // }
+    request.always(function() {
+        $('#ajaxLoader').remove();
+    });
 }
 
 function localizarProgresso ()
@@ -377,4 +371,26 @@ function localizarProgresso ()
         localStorage.getItem("fase4"),
         localStorage.getItem("fase5"),
     ]
+}
+
+function dublagem (bloco, etapa)
+{
+    console.log(bloco, etapa);
+
+    let dub = '';
+    // if (bloco==2) {
+
+        switch (bloco) {
+        // switch (etapa) {
+            case 2: dub = 'eu me chamo ariel';              break;
+            case 3: dub = 'proximos de descobrir a cidade'; break;
+            case 4: dub = 'este é o caminho';               break;
+        }
+    // }
+
+    if (dub != '') {
+        console.log('emitir som: '+ dub);
+        audios['dublagem'] = new Audio('audio/frases/'+ dub +'.ogg');
+        audios['dublagem'].play();
+    }
 }

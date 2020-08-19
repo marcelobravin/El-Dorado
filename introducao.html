@@ -11,29 +11,40 @@
     <!-- <script type="text/javascript" src="assets/habituacao.js"></script> -->
 
     <script type="text/javascript">
+        var audios = [];
+
         let frases = [
             "- Existe uma lenda de uma cidade perdida."
             , "- Totalmente feita de ouro puro e com tesouros inimagináveis."
-            , "- Muitos exploradores tentaram achá-la,  porém nenhum conseguiu."
+            , "- Muitos exploradores tentaram achá-la, porém nenhum conseguiu."
         ];
+/*
+        let dublagens = [
+            "- Existe uma lenda de uma cidade perdida."
+            , "- Totalmente feita de ouro puro e com tesouros inimagináveis."
+            , "- Muitos exploradores tentaram achá-la, porém nenhum conseguiu."
+        ];
+*/
 
         $(document).ready(function(){
 
             $("#ancora").click(function(e){
                 e.preventDefault();
                 var textToDisplay = getFraseSequencial(etapa);
+                // console.log(bloco, etapa);
+
+
+                dublagem(bloco, etapa);
 
                 if (textToDisplay == -1) {
 
                     if (bloco == 0) {
-                        frases = [
-                            "- Até hoje!"
-                        ];
-
+                        frases = ["- Até hoje!"];
 
                     } else if (bloco == 1) {
                         $("body").addClass('quadro-1');
                         $(".typewriter").addClass("invisivel");
+
                     } else if (bloco == 2) {
                         $(".typewriter").removeClass("invisivel");
                         frases = [
@@ -41,6 +52,20 @@
                             , "- Estamos próximos de descobrir a cidade mais procurada de todos os tempos, eu tenho certeza disso."
                             , "- Vamos! Este é o caminho."
                         ];
+/** /
+console.log(bloco, etapa);
+                        let dub = '';
+                        switch (etapa) {
+                            case 1: dub = 'eu me chamo ariel';              break;
+                            case 2: dub = 'proximos de descobrir a cidade'; break;
+                            case 3: dub = 'este é o caminho';               break;
+                        }
+
+                        if (dub != '') {
+                            audios['dublagem'] = new Audio('audio/frases/'+ dub +'.ogg');
+                            audios['dublagem'].play();
+                        }
+/**/
 
                         $("body").addClass('quadro-2');
 
@@ -49,30 +74,25 @@
                             "- Veja, lá está a pirâmide, com certeza ela é a entrada para a cidade de ouro El-Dorado."
                         ];
 
+                        audios['dublagem'] = new Audio('audio/frases/veja la esta a piramide.ogg');
+                        audios['dublagem'].play();
+
                         $("body").addClass('quadro-3');
 
                     } else if (bloco == 4) {
-                        /*$("body").addClass('quadro-4');
-                        $(".typewriter").addClass("invisivel");
-
-                        let link = '<a href="menu.html" id="iniciarJogo">Iniciar</a>';
-                        $(".container").append(link);
-                        $("#ancora").remove();*/
-
                         window.location.href = "menu.html";
                     }
 
                     etapa = 0;
                     bloco++;
                     typewrite();
-                    return;
+                    // return;
                 } else {
                     type(textToDisplay);
                     etapa++;
                 }
             });
         });
-
 
         setTimeout(function(){
             $("#ancora").click();
@@ -90,9 +110,24 @@
                 return;
 
                 // muda para proximo bloco de textos
-                etapa = 0;
-                bloco++;
+                // etapa = 0; /* precisa ? */
+                // bloco++; /* precisa ? */
             } else {
+
+                /** /
+                console.log(bloco, etapa);
+                                        let dub = '';
+                                        switch (etapa) {
+                                            case 1: dub = 'eu me chamo ariel';              break;
+                                            case 2: dub = 'proximos de descobrir a cidade'; break;
+                                            case 3: dub = 'este é o caminho';               break;
+                                        }
+
+                                        if (dub != '') {
+                                            audios['dublagem'] = new Audio('audio/frases/'+ dub +'.ogg');
+                                            audios['dublagem'].play();
+                                        }
+                /**/
                 type(textToDisplay);
                 etapa++;
             }
@@ -111,11 +146,9 @@
         <div class="typewriter"></div>
 
         <div id="containerBotoesConfirm" class="">
-
             <a href="#" id="ancora">
                 Next
             </a>
-
         </div>
     </div>
 
