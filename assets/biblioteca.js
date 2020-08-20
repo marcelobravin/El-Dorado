@@ -56,6 +56,7 @@ function acertou ()
             $("body").addClass("simulacao");
         }
         setTimeout(function(){
+            audios['acerto'].volume = 0.3;
             audios['acerto'].play();
         }, 1000);
 
@@ -102,7 +103,9 @@ function errou ()
         setTimeout(function(){
 
             if ( SIMULACAO ) {
-                type("Eu não sou muito bom nisso...\n\rVocê está pronto?");
+                type("Oh... Eu não sou bom nisso... Você pode me ajudar?");
+                dublagem("eu nao sou bom nisso.ogg");
+
                 setTimeout(function(){
                     $("#containerBotoesConfirm").removeClass("invisivel");
                 }, 3000);
@@ -139,7 +142,6 @@ function demonstrarSequencia ()
 
         setTimeout(function(){
             ativarBotao(x);
-        // }, TEMPO *(i+1));
         }, TEMPO *(i+1) +INTERVALO);
 
         if ( i == sequencia.length-1  ) {

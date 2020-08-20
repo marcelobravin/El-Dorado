@@ -1,3 +1,5 @@
+var audios = [];
+
 $(document).ready(function(){
     let etapa = 0;
     let bloco = 0;
@@ -15,7 +17,8 @@ $(document).ready(function(){
             etapa = 0;
             bloco++;
         } else {
-            type(textToDisplay);
+            type(textToDisplay[0]);
+            dublagem(textToDisplay[1]);
             etapa++;
         }
     });
