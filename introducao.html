@@ -12,83 +12,89 @@
 
     <script type="text/javascript">
         var audios = [];
-
         let frases = [
-            "- Existe uma lenda de uma cidade perdida."
-            , "- Totalmente feita de ouro puro e com tesouros inimagináveis."
-            , "- Muitos exploradores tentaram achá-la, porém nenhum conseguiu."
-        ];
+            [
+                "- Existe uma lenda de uma cidade perdida.",
+                "1.mp3"
+            ]
 /*
-        let dublagens = [
-            "- Existe uma lenda de uma cidade perdida."
-            , "- Totalmente feita de ouro puro e com tesouros inimagináveis."
-            , "- Muitos exploradores tentaram achá-la, porém nenhum conseguiu."
-        ];
+            , [
+                "- Totalmente feita de ouro e com tesouros inimagináveis.",
+                "2.mp3"
+            ], [
+                "- Muitos exploradores tentavam achá-la, porém ninguém conseguiu.",
+                "3.mp3"
+            ]
 */
+            , [
+                "- Até hoje.",
+                "4.mp3"
+            ]
+        ];
 
         $(document).ready(function(){
 
             $("#ancora").click(function(e){
                 e.preventDefault();
+
+                console.log(etapa, bloco);
+
                 var textToDisplay = getFraseSequencial(etapa);
-                // console.log(bloco, etapa);
-
-
-                dublagem(bloco, etapa);
-
-                if (textToDisplay == -1) {
+                if (textToDisplay == -1) { /* acabaram as frases */
 
                     if (bloco == 0) {
-                        frases = ["- Até hoje!"];
-
-                    } else if (bloco == 1) {
                         $("body").addClass('quadro-1');
                         $(".typewriter").addClass("invisivel");
 
-                    } else if (bloco == 2) {
+                    } else if (bloco == 1) { /* renova frases */
                         $(".typewriter").removeClass("invisivel");
                         frases = [
-                            "- Olá aventureiro, eu me chamo Ariel, que bom que você chegou para me ajudar!"
-                            , "- Estamos próximos de descobrir a cidade mais procurada de todos os tempos, eu tenho certeza disso."
-                            , "- Vamos! Este é o caminho."
+                            [
+                                "- Olá aventureiro, eu me chamo Ariel, que bom que você chegou para me ajudar!",
+                                "eu me chamo ariel.ogg"
+                            ], [
+                                "- Estamos próximos de descobrir a cidade mais procurada de todos os tempos, eu tenho certeza disso.",
+                                "proximos de descobrir a cidade.ogg"
+                            ], [
+                                "- Vamos! Este é o caminho.",
+                                "este é o caminho.ogg"
+                            ]
                         ];
-/** /
-console.log(bloco, etapa);
-                        let dub = '';
-                        switch (etapa) {
-                            case 1: dub = 'eu me chamo ariel';              break;
-                            case 2: dub = 'proximos de descobrir a cidade'; break;
-                            case 3: dub = 'este é o caminho';               break;
-                        }
-
-                        if (dub != '') {
-                            audios['dublagem'] = new Audio('audio/frases/'+ dub +'.ogg');
-                            audios['dublagem'].play();
-                        }
-/**/
 
                         $("body").addClass('quadro-2');
 
-                    } else if (bloco == 3) {
+                    } else if (bloco == 2) {
                         frases = [
-                            "- Veja, lá está a pirâmide, com certeza ela é a entrada para a cidade de ouro El-Dorado."
+                            [
+                                "- Veja, lá está a pirâmide, com certeza ela é a entrada para a cidade de ouro, El-Dorado."
+                                , "veja la esta a piramide.ogg"
+                            ]
                         ];
-
-                        audios['dublagem'] = new Audio('audio/frases/veja la esta a piramide.ogg');
-                        audios['dublagem'].play();
 
                         $("body").addClass('quadro-3');
 
-                    } else if (bloco == 4) {
-                        window.location.href = "menu.html";
+                    } else if (bloco == 3) {
+
+                        setTimeout(function(){
+
+                            setTimeout(function(){
+                                window.location.href = "menu.html";
+                            }, 1000);
+
+                            $("body").css('transition', '1s');
+                            $("body").css('opacity', 0);
+                        }, 1000);
                     }
 
                     etapa = 0;
                     bloco++;
-                    typewrite();
-                    // return;
+
+                    let $output = $(".typewriter");
+                    $output.empty(); // clear out the $output variable
+
                 } else {
-                    type(textToDisplay);
+                    type(textToDisplay[0]);
+                    dublagem(textToDisplay[1]);
                     etapa++;
                 }
             });
@@ -99,7 +105,8 @@ console.log(bloco, etapa);
         }, 1500);
 
         var etapa = 0;
-        var bloco = 0;
+        var bloco = 1;
+/*
         function typewrite ()
         {
             var textToDisplay = getFraseSequencial(etapa);
@@ -108,30 +115,11 @@ console.log(bloco, etapa);
                 let faseAtual = parseInt( pegarNumeroFase() );
                 window.location.href = "simulacao.html?=" + faseAtual;
                 return;
-
-                // muda para proximo bloco de textos
-                // etapa = 0; /* precisa ? */
-                // bloco++; /* precisa ? */
             } else {
-
-                /** /
-                console.log(bloco, etapa);
-                                        let dub = '';
-                                        switch (etapa) {
-                                            case 1: dub = 'eu me chamo ariel';              break;
-                                            case 2: dub = 'proximos de descobrir a cidade'; break;
-                                            case 3: dub = 'este é o caminho';               break;
-                                        }
-
-                                        if (dub != '') {
-                                            audios['dublagem'] = new Audio('audio/frases/'+ dub +'.ogg');
-                                            audios['dublagem'].play();
-                                        }
-                /**/
-                type(textToDisplay);
+                type(textToDisplay[0]);
                 etapa++;
             }
-        }
+        }*/
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
     <link rel="stylesheet" type="text/css" href="assets/introducao.css">

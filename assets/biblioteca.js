@@ -274,21 +274,21 @@ function ativarBotao (numeroClicado)
 function type (textToDisplay, INTERVAL=50)
 {
     let $output = $(".typewriter");
-    $output.empty(); //clear out the $output variable
+    $output.empty(); // clear out the $output variable
 
-    $("#ancora").css('display', 'none');
-
-    let displayInt;
     textToDisplay = textToDisplay.split(''); //split the text variable into an array
 
+    let displayInt;
     displayInt = setInterval(function() {
-        let word = textToDisplay.shift(); //removes the first word ("Even") and sets the word variable to that value
+        let word = textToDisplay.shift();
         if (word == null) {
             $("#ancora").css('display', 'block');
             return clearInterval(displayInt);
-        } //if we're out of words to append
-        $output.append(word + ''); //else, add the word and then a space (.split(' ') will not carry over the spaces)
-    }, INTERVAL); //setInterval is delayed 300ms, so a word will be added every 300ms
+        } // if we're out of words to append
+        $output.append(word + '');
+    }, INTERVAL); //setInterval so a word will be delayed
+
+    $("#ancora").css('display', 'none');
 }
 
 function getFraseAleatoria ()
@@ -373,24 +373,8 @@ function localizarProgresso ()
     ]
 }
 
-function dublagem (bloco, etapa)
+function dublagem (arquivoAudio)
 {
-    console.log(bloco, etapa);
-
-    let dub = '';
-    // if (bloco==2) {
-
-        switch (bloco) {
-        // switch (etapa) {
-            case 2: dub = 'eu me chamo ariel';              break;
-            case 3: dub = 'proximos de descobrir a cidade'; break;
-            case 4: dub = 'este é o caminho';               break;
-        }
-    // }
-
-    if (dub != '') {
-        console.log('emitir som: '+ dub);
-        audios['dublagem'] = new Audio('audio/frases/'+ dub +'.ogg');
-        audios['dublagem'].play();
-    }
+    audios['dublagem'] = new Audio('audio/frases/'+ arquivoAudio);
+    audios['dublagem'].play();
 }
