@@ -1,6 +1,7 @@
 function iniciarJogo ()
 {
     if ( comBGM ) {
+        audios['BGM'].volume = .5;
         audios['BGM'].loop = true;
         audios['BGM'].play();
     }
@@ -23,9 +24,9 @@ function iniciarJogo ()
 
         var request = $.ajax({
             type: 'GET',
-            url: 'controle/buscaRecorde.php',
-            // dataType: 'html',
+            url : 'controle/buscaRecorde.php',
             data: parametros,
+            // dataType: 'html',
             beforeSend: function(xhr) {
                 xhr.overrideMimeType('text/plain; charset=x-user-defined');
                 $("body").append("<div id='ajaxLoader'></div>");
@@ -34,7 +35,6 @@ function iniciarJogo ()
         });
 
         request.done(function(data) {
-            // console.log(data);
             localStorage.setItem('record'+estagio, data);
         });
 
@@ -216,7 +216,7 @@ function carregarProximaSequencia ()
         audios['BGM'].playbackRate = 1 + x;
         audios['BGM'].play();
 
-        INTERVALO -= 100;/* * sequencia.length*/
+        INTERVALO -= 100;
         TEMPO     -= 50;
     }
 
@@ -278,7 +278,7 @@ function type (textToDisplay, INTERVAL=50)
     let $output = $(".typewriter");
     $output.empty(); // clear out the $output variable
 
-    textToDisplay = textToDisplay.split(''); //split the text variable into an array
+    textToDisplay = textToDisplay.split(''); // split the text variable into an array
 
     let displayInt;
     displayInt = setInterval(function() {
@@ -288,7 +288,7 @@ function type (textToDisplay, INTERVAL=50)
             return clearInterval(displayInt);
         } // if we're out of words to append
         $output.append(word + '');
-    }, INTERVAL); //setInterval so a word will be delayed
+    }, INTERVAL); // setInterval so each letter will be delayed
 
     $("#ancora").css('display', 'none');
 }
@@ -339,22 +339,20 @@ function registrarProgresso (fase, pontuacao)
     };
 
     var request = $.ajax({
-        type       : 'POST',
-        url        : 'controle/insercao.php',
-        // dataType   : 'html',
-        data       : parametros,
-        beforeSend : function(xhr) {
+        type      : 'POST',
+        url       : 'controle/insercao.php',
+        data      : parametros,
+        beforeSend: function(xhr) {
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
             $("body").append("<div id='ajaxLoader'></div>");
         }
     });
 
-    request.done(function(data) {
-        console.log(data);
-    });
+    // request.done(function(data) {
+    //     console.log(data);
+    // });
 
     request.fail(function(jqXHR, textStatus) {
-        console.log(jqXHR);
         alert("Ocorreu uma falha na requisição ajax!");
     });
 
