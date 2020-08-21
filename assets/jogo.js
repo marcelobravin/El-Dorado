@@ -1,20 +1,20 @@
 const SIMULACAO = false;
 
-var frases = [
+var frases = [ /* de incentivo */
     [
-        "Vamos tentar novamente.",
+        "- Vamos tentar novamente.",
         "tentar novamente.ogg"
     ], [
-        "Você é incrível.",
+        "- Você é incrível.",
         "voce e incrivel.ogg"
     ], [
-        "Continue assim.",
+        "- Continue assim.",
         "continue assim.ogg"
     ], [
-        "Tente novamente.",
+        "- Tente novamente.",
         "tente novamente.ogg"
     ], [
-        "Vamos tentar novamente, eu sei que você consegue",
+        "- Vamos tentar novamente, eu sei que você consegue.",
         "novamente.ogg"
     ]
 ];

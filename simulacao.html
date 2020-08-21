@@ -10,11 +10,9 @@
     <script type="text/javascript" src="assets/biblioteca.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
     <script type="text/javascript" src="assets/simulacao.js"></script>
-    <!-- <script type="text/javascript" src="assets/jogo.js"></script> -->
     <script type="text/javascript" src="assets/tremor.js"></script>
 
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
-    <!-- <link rel="stylesheet" type="text/css" href="assets/habituacao.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/shake.css">
     <style type="text/css">
         #containerBotoesConfirm {
@@ -47,11 +45,25 @@
         body.simulacaoTerminada.fase-4 { background-image: url('assets/imagens/habituacao-4/0.png'); }
 
         body.simulacaoTerminada { background-position-y: -8px; }
-        /*body.simulacaoTerminada.shake { background-position-y: 0px; }*/
     </style>
     <script type="text/javascript">
         var comSE  = false;
         var comBGM = false;
+        var fraseErro = [
+            [
+                "- Agora é sua vez, você pode me ajudar?",
+                "agora e sua vez.ogg"
+            ], [
+                "- Oh... Eu não sou bom nisso... Você pode me ajudar?",
+                "eu nao sou bom nisso.ogg"
+            ], [
+                "- Você é muito melhor que eu nisso, você pode me ajudar?",
+                "voce e muito melhor.ogg"
+            ], [
+                "- Você pode me ajudar?",
+                "voce pode me ajudar.ogg"
+            ]
+        ];
 
         let parametroGet = getStageNumber();
         switch ( parametroGet ) {
@@ -97,18 +109,6 @@
             <br>
 
             <img id="hand" src="assets/imagens/mão para clicar.png">
-
-<!--
-            <div id="debug">
-                <input value="..." id="tamanhoSequencia">
-                <br>
-                <input value="===" id="passo">
-                <br>
-                <input value="---" id="sequencia">
-                <br>
-                <a id="sound" style="color:red">BGM</a>
-                <br>
-            </div> -->
 
         </div>
 

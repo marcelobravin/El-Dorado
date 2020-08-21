@@ -45,33 +45,19 @@
             }
 
         } catch(PDOException $e) {
-/*
-            if ($e->getCode() == 1045) { // access denied
-                reportError($e, '1045');
-            } else if ($e->getCode() == 2002) { // timeout
-                reportError($e,  '2002');
-            } else {
-                reportError($e, '0201');
-            }
-            exit;
-*/
+
         }
         return $dbh;
     }
 
     function inserirPontuacao ($post)
     {
-        $sql = "INSERT INTO pontuacoes (nome, fase1) VALUES (?, ?)";
+        $sql = "INSERT INTO pontuacoes (nome) VALUES (?)";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);
 
-        $stmt->bindValue(1, $post['nome']);
-        $stmt->bindValue(2, $post['fase1']);
-        // $stmt->bindValue(3, $post['fase2']);
-        // $stmt->bindValue(4, $post['fase3']);
-        // $stmt->bindValue(5, $post['fase4']);
-        // $stmt->bindValue(6, $post['fase5']);
+        $stmt->bindValue(1, $post['jogador']);
 
         return $stmt->execute();
     }
@@ -80,19 +66,19 @@
     {
         $sql = "
             UPDATE pontuacoes
-            SET fase{$post['atual']} = ?
+            SET fase{$post['fase']} = ?
             WHERE
                 nome = ?
-                AND fase{$post['atual']} < ?
+                AND fase{$post['fase']} < ?
         ";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);
 
-        $indice = 'fase'.$post['atual'];
-        $stmt->bindValue(1, $post[ $indice ]);
-        $stmt->bindValue(2, $post['nome']);
-        $stmt->bindValue(3, $post[ $indice ]);
+        $indice = 'fase'.$post['fase'];
+        $stmt->bindValue(1, $post['pontuacao']);
+        $stmt->bindValue(2, $post['jogador']);
+        $stmt->bindValue(3, $post['pontuacao']);
 
         return $stmt->execute();
     }

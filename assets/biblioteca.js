@@ -18,8 +18,8 @@ function iniciarJogo ()
     if ( !SIMULACAO ) {
         let estagio = pegarNumeroFase();
         var parametros = {
-          nome   : localStorage.getItem('nome'),
-          estagio: estagio
+            nome   : localStorage.getItem('nome'),
+            estagio: estagio
         };
 
         var request = $.ajax({
@@ -83,10 +83,7 @@ function errou ()
     INTERVALO = INTERVALO_INICIAL;
 
     if (sequencia.length > PASSOS_VITORIA || SIMULACAO) {
-
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("body").offset().top - 10
-        }, 1000);
+        scrollToTop();
 
         $(".typewriter").removeClass("invisivel");
         $("#palcoJogo").css("visibility", "hidden");
@@ -104,27 +101,34 @@ function errou ()
             clearInterval(tremorInterval);
         }
 
-        setTimeout(function(){
-
-            if ( SIMULACAO ) {
-                type("Oh... Eu não sou bom nisso... Você pode me ajudar?");
-                dublagem("eu nao sou bom nisso.ogg");
-
+        if ( SIMULACAO ) {
+            let x = getRandomInt(0, fraseErro.length-1);
+            setTimeout(function(){
                 setTimeout(function(){
+                    type(fraseErro[x][0]);
+                    dublagem(fraseErro[x][1]);
+                }, 900);
+
                     $("#containerBotoesConfirm").removeClass("invisivel");
-                }, 3000);
-            } else {
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $("#containerBotoesConfirm").offset().top
+                    }, 2000);
+            }, 2500);
+        } else {
 
-                type("Parabéns!\n\rVocê conseguiu!");
-                dublagem("parabens, voce conseguiu.ogg");
+            let estagio = pegarNumeroFase();
+            registrarProgresso(estagio, sequencia.length-1);
 
-                let estagio = pegarNumeroFase();
-                registrarProgresso(estagio, sequencia.length-1);
+            type(fraseSucesso[0]);
+            dublagem(fraseSucesso[1]);
+
+            setTimeout(function(){
                 setTimeout(function(){
                     carregarProximaFase();
                 }, 3000);
-            }
-        }, 3000);
+            }, 3500);
+
+        }
     } else {
         const frase = getFraseAleatoria();
         exibir(frase[0], "erro");
@@ -188,7 +192,7 @@ function carregarProximaFase ()
             type('Vamos nessa!');
             dublagem("vamos nessa.ogg");
         }
-
+/*
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().top
         }, 10);
@@ -196,7 +200,7 @@ function carregarProximaFase ()
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().bottom
         }, 3000);
-
+*/
         let destino = "";
         let faseAtual = pegarNumeroFase();
         sessionStorage.setItem('fase-'+faseAtual, sequencia.length);
@@ -294,7 +298,7 @@ function type (textToDisplay, INTERVAL=30)
     displayInt = setInterval(function() {
         let word = textToDisplay.shift();
         if (word == null) {
-            $("#ancora").css('display', 'block');
+            /*$("#ancora").css('display', 'block');*/
             return clearInterval(displayInt);
         } // if we're out of words to append
         $output.append(word + '');
@@ -336,21 +340,16 @@ function getRandomInt (min, max)
 function registrarProgresso (fase, pontuacao)
 {
     localStorage.setItem("fase"+fase, pontuacao);
-    localStorage.setItem("atual", fase)
 
     var parametros = {
-        nome : localStorage.getItem("nome"),
-        fase1: localStorage.getItem("fase1"),
-        fase2: localStorage.getItem("fase2"),
-        fase3: localStorage.getItem("fase3"),
-        fase4: localStorage.getItem("fase4"),
-        fase5: localStorage.getItem("fase5"),
-        atual: localStorage.getItem("atual")
+        jogador  : localStorage.getItem("nome"),
+        fase     : fase,
+        pontuacao: pontuacao
     };
 
     var request = $.ajax({
         type      : 'POST',
-        url       : 'controle/insercao.php',
+        url       : 'controle/registro.php',
         data      : parametros,
         beforeSend: function(xhr) {
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
@@ -358,9 +357,9 @@ function registrarProgresso (fase, pontuacao)
         }
     });
 
-    // request.done(function(data) {
-    //     console.log(data);
-    // });
+    request.done(function(data) {
+        console.log(data);
+    });
 
     request.fail(function(jqXHR, textStatus) {
         alert("Ocorreu uma falha na requisição ajax!");
@@ -387,4 +386,15 @@ function dublagem (arquivoAudio)
 {
     audios['dublagem'] = new Audio('audio/frases/'+ arquivoAudio);
     audios['dublagem'].play();
+
+    audios['dublagem'].addEventListener("ended", function(){
+        $("#ancora").css('display', 'block');
+    });
+}
+
+function scrollToTop ()
+{
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("body").offset().top - 10
+    }, 1000);
 }
