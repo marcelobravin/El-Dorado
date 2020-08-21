@@ -1,14 +1,22 @@
 const SIMULACAO = false;
 
 var frases = [
-    "- Você está cada vez melhor!",
-    "- Vamos tentar novamente, eu sei que você consegue!",
-    "- Vamos tentar novamente.",
-    "- Muito bom, estamos quase conseguindo.",
-    "- Você é incrível.",
-    "- Continue assim.",
-    "- Tente novamente.",
-    "- Vamos novamente."
+    [
+        "Vamos tentar novamente.",
+        "tentar novamente.ogg"
+    ], [
+        "Você é incrível.",
+        "voce e incrivel.ogg"
+    ], [
+        "Continue assim.",
+        "continue assim.ogg"
+    ], [
+        "Tente novamente.",
+        "tente novamente.ogg"
+    ], [
+        "Vamos tentar novamente, eu sei que você consegue",
+        "novamente.ogg"
+    ]
 ];
 
 $(document).ready(function(){

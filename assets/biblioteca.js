@@ -1,7 +1,7 @@
 function iniciarJogo ()
 {
     if ( comBGM ) {
-        audios['BGM'].volume = .5;
+        audios['BGM'].volume = .2;
         audios['BGM'].loop = true;
         audios['BGM'].play();
     }
@@ -26,7 +26,6 @@ function iniciarJogo ()
             type: 'GET',
             url : 'controle/buscaRecorde.php',
             data: parametros,
-            // dataType: 'html',
             beforeSend: function(xhr) {
                 xhr.overrideMimeType('text/plain; charset=x-user-defined');
                 $("body").append("<div id='ajaxLoader'></div>");
@@ -39,7 +38,6 @@ function iniciarJogo ()
         });
 
         request.fail(function(jqXHR, textStatus) {
-            console.log(jqXHR);
             alert("Ocorreu uma falha na requisição ajax!");
         });
 
@@ -56,7 +54,7 @@ function acertou ()
             $("body").addClass("simulacao");
         }
         setTimeout(function(){
-            audios['acerto'].volume = 0.3;
+            audios['acerto'].volume = 0.2;
             audios['acerto'].play();
         }, 1000);
 
@@ -75,8 +73,14 @@ function acertou ()
 /* -------------------------------------------- pode ser em carater de SIMULACAO */
 function errou ()
 {
-    const frase = getFraseAleatoria();
-    exibir(frase, "erro");
+    if ( !audios['BGM'].paused ) {
+        audios['BGM'].pause();
+        audios['BGM'].playbackRate = 1;
+        audios['BGM'].play();
+    }
+
+    TEMPO     = TEMPO_INICIAL;
+    INTERVALO = INTERVALO_INICIAL;
 
     if (sequencia.length > PASSOS_VITORIA || SIMULACAO) {
 
@@ -112,6 +116,8 @@ function errou ()
             } else {
 
                 type("Parabéns!\n\rVocê conseguiu!");
+                dublagem("parabens, voce conseguiu.ogg");
+
                 let estagio = pegarNumeroFase();
                 registrarProgresso(estagio, sequencia.length-1);
                 setTimeout(function(){
@@ -120,6 +126,10 @@ function errou ()
             }
         }, 3000);
     } else {
+        const frase = getFraseAleatoria();
+        exibir(frase[0], "erro");
+        dublagem(frase[1]);
+
         setTimeout(function(){
             setTimeout(function(){
                 passo = 0;
@@ -171,13 +181,13 @@ function carregarProximaFase ()
     } else {
         $("body").addClass("venceu");
 
-        var textToDisplay = 'Vamos nessa!';
-
         if (pegarNumeroFase() >= 4 ) {
-            textToDisplay = "- Agora preciso que você mantenha a ponte abaixada para que eu busque o ouro para nós."
+            type("- Agora preciso que você mantenha a ponte abaixada para que eu busque o ouro para nós.");
+            dublagem("preciso que voce mantenha.ogg");
+        } else {
+            type('Vamos nessa!');
+            dublagem("vamos nessa.ogg");
         }
-
-        type(textToDisplay);
 
         $([document.documentElement, document.body]).animate({
             scrollTop: $("body").offset().top
@@ -196,7 +206,7 @@ function carregarProximaFase ()
         } else {
             destino = "fase-5.html";
         }
-        $(".container").append('<a id="next" href="'+ destino +'">Próxima Fase</a>');
+        $(".typewriter").append('<a id="next" href="'+ destino +'">Próxima Fase</a>');
     }
 }
 
@@ -212,8 +222,7 @@ function carregarProximaSequencia ()
 
     if ( !audios['BGM'].paused ) {
         audios['BGM'].pause();
-        let x = sequencia.length /10;
-        audios['BGM'].playbackRate = 1 + x;
+        audios['BGM'].playbackRate = 1 + (sequencia.length/10);
         audios['BGM'].play();
 
         INTERVALO -= 100;
@@ -269,11 +278,12 @@ function ativarBotao (numeroClicado)
             acertou();
         } else {
             errou();
+            $("body").addClass("simulacao");
         }
     }
 }
 
-function type (textToDisplay, INTERVAL=50)
+function type (textToDisplay, INTERVAL=30)
 {
     let $output = $(".typewriter");
     $output.empty(); // clear out the $output variable

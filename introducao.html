@@ -8,25 +8,23 @@
     <script type="text/javascript" src="assets/vendors/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="assets/biblioteca.js"></script>
     <script type="text/javascript" src="assets/scrollTo.js"></script>
-    <!-- <script type="text/javascript" src="assets/habituacao.js"></script> -->
 
     <script type="text/javascript">
+        var etapa = 0;
+        var bloco = 1;
+
         var audios = [];
         let frases = [
             [
                 "- Existe uma lenda de uma cidade perdida.",
                 "1.mp3"
-            ]
-/*
-            , [
+            ], [
                 "- Totalmente feita de ouro e com tesouros inimagináveis.",
                 "2.mp3"
             ], [
                 "- Muitos exploradores tentavam achá-la, porém ninguém conseguiu.",
                 "3.mp3"
-            ]
-*/
-            , [
+            ], [
                 "- Até hoje.",
                 "4.mp3"
             ]
@@ -36,8 +34,6 @@
 
             $("#ancora").click(function(e){
                 e.preventDefault();
-
-                console.log(etapa, bloco);
 
                 var textToDisplay = getFraseSequencial(etapa);
                 if (textToDisplay == -1) { /* acabaram as frases */
@@ -75,14 +71,11 @@
 
                     } else if (bloco == 3) {
 
+                        $("body").css('transition', '1s');
+                        $("body").css('opacity', 0);
+
                         setTimeout(function(){
-
-                            setTimeout(function(){
-                                window.location.href = "menu.html";
-                            }, 1000);
-
-                            $("body").css('transition', '1s');
-                            $("body").css('opacity', 0);
+                            window.location.href = "menu.html";
                         }, 1000);
                     }
 
@@ -103,23 +96,6 @@
         setTimeout(function(){
             $("#ancora").click();
         }, 1500);
-
-        var etapa = 0;
-        var bloco = 1;
-/*
-        function typewrite ()
-        {
-            var textToDisplay = getFraseSequencial(etapa);
-
-            if (textToDisplay == -1) {
-                let faseAtual = parseInt( pegarNumeroFase() );
-                window.location.href = "simulacao.html?=" + faseAtual;
-                return;
-            } else {
-                type(textToDisplay[0]);
-                etapa++;
-            }
-        }*/
     </script>
     <link rel="stylesheet" type="text/css" href="assets/jogo.css">
     <link rel="stylesheet" type="text/css" href="assets/introducao.css">
