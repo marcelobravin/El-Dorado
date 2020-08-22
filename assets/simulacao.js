@@ -1,4 +1,4 @@
-const SIMULATIONS_BEFORE_ERROR = 1;
+const SIMULATIONS_BEFORE_ERROR = 3;
 const SIMULACAO = true;
 
 var frases    = [

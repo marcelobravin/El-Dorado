@@ -1,4 +1,4 @@
-const PASSOS_VITORIA    = 1;
+const PASSOS_VITORIA    = 5;
 const TEMPO_INICIAR     = 1000;
 const TEMPO_INICIAL     = 1000;
 const INTERVALO_INICIAL = 2000;

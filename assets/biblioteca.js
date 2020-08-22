@@ -195,15 +195,7 @@ function carregarProximaFase ()
             type("- Vamos nessa!");
             dublagem("vamos nessa.ogg");
         }
-/*
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("body").offset().top
-        }, 10);
 
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("body").offset().bottom
-        }, 3000);
-*/
         let destino = "";
         let faseAtual = pegarNumeroFase();
         sessionStorage.setItem('fase-'+faseAtual, sequencia.length);
@@ -290,7 +282,7 @@ function ativarBotao (numeroClicado)
     }
 }
 
-function type (textToDisplay, INTERVAL=70)
+function type (textToDisplay, INTERVAL=65)
 {
     let $output = $(".typewriter");
     $output.empty(); // clear out the $output variable

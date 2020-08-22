@@ -86,7 +86,7 @@
 
     function getPontuacoes ()
     {
-        $sql = "SELECT * FROM pontuacoes";
+        $sql = "SELECT * FROM pontuacoes ORDER BY nome";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);
