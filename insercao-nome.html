@@ -49,16 +49,13 @@
                     selectText();
                 }, 1000);
 
-
                 $('#nome').click(function(){
                     selectText();
                 });
-                $('#nome').keyup(function(){
-                    sessionStorage.setItem("nome", $(this).val());
+
+                $('#ancora').click(function(){
+                    localStorage.setItem("nome", $('#nome').val());
                 });
-                // $('#nome').blur(function(){
-                    // alert("Nome registrado");
-                // });
             });
 
             function selectText ()

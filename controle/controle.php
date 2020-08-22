@@ -52,12 +52,13 @@
 
     function inserirPontuacao ($post)
     {
-        $sql = "INSERT INTO pontuacoes (nome) VALUES (?)";
+        $sql = "INSERT INTO pontuacoes (nome, fase1) VALUES (?, ?)";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);
 
         $stmt->bindValue(1, $post['jogador']);
+        $stmt->bindValue(2, $post['pontuacao']);
 
         return $stmt->execute();
     }
@@ -99,7 +100,7 @@
 
     function getPontuacao ($nome='')
     {
-       $sql = "SELECT * FROM pontuacoes WHERE nome = ?";
+        $sql = "SELECT * FROM pontuacoes WHERE nome = ?";
 
         $con = conectarPdo();
         $stmt = $con->prepare($sql);

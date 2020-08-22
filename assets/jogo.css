@@ -31,12 +31,12 @@ body.fase-5.venceu { background-image: url('../assets/imagens/fase-5/vitoria.png
 
     position: fixed;
 
-    top: 337px;
+    top: 57px;
     width: 800px;
     height: 109px;
     z-index: 9999999;
     background: url(imagens/botoes/balao.png) center right no-repeat;
-    background-size: 650px 100px;
+    background-size: 660px 100px;
 }
 
 #resposta.acerto { color: #10B210; }

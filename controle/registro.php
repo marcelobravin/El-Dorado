@@ -1,16 +1,19 @@
 <?php
     include "controle.php";
 
-    # http://localhost/projetos/genius/controle/insercao.php
+    # URL: http://localhost/projetos/genius/controle/insercao.php
 /*
-    #insert
+    # INSERT
     $_POST['jogador']   = 'MARK';
 
-    #update
+    # UPDATE
     $_POST['fase']      = 3;
     $_POST['pontuacao'] = 12;
 */
+    registrar();
 
+function registrar ()
+{
     $jogadorJaRegistrado = getPontuacao( $_POST['jogador'] );
 
     if ( !$jogadorJaRegistrado ) {
@@ -18,4 +21,5 @@
     } else {
         echo atualizarPontuacao($_POST);
     }
+}
 ?>

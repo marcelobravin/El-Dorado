@@ -189,7 +189,7 @@ function carregarProximaFase ()
             type("- Agora preciso que você mantenha a ponte abaixada para que eu busque o ouro para nós.");
             dublagem("preciso que voce mantenha.ogg");
         } else {
-            type('Vamos nessa!');
+            type("- Vamos nessa!");
             dublagem("vamos nessa.ogg");
         }
 /*
@@ -359,6 +359,7 @@ function registrarProgresso (fase, pontuacao)
 
     request.done(function(data) {
         console.log(data);
+        // alert("Salvou!");
     });
 
     request.fail(function(jqXHR, textStatus) {
