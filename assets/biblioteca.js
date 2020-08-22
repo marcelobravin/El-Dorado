@@ -121,12 +121,15 @@ function errou ()
 
             type(fraseSucesso[0]);
             dublagem(fraseSucesso[1]);
+            setTimeout(function(){
+                dublagem("Well Done CCBY3.ogg");
+            }, 1000);
 
             setTimeout(function(){
                 setTimeout(function(){
                     carregarProximaFase();
-                }, 3000);
-            }, 3500);
+                }, 2500);
+            }, 3000);
 
         }
     } else {
@@ -261,13 +264,13 @@ function ativarBotao (numeroClicado)
 {
     if ( comSE ) {
         switch ( parseInt(numeroClicado) ) {
-            case 1: audios['do'].play();
+            case 1: audios['do'].cloneNode(true).play();
                 break;
-            case 2: audios['re'].play();
+            case 2: audios['re'].cloneNode(true).play();
                 break;
-            case 3: audios['mi'].play();
+            case 3: audios['mi'].cloneNode(true).play();
                 break;
-            case 4: audios['fa'].play();
+            case 4: audios['fa'].cloneNode(true).play();
                 break;
         }
     }
@@ -287,7 +290,7 @@ function ativarBotao (numeroClicado)
     }
 }
 
-function type (textToDisplay, INTERVAL=30)
+function type (textToDisplay, INTERVAL=70)
 {
     let $output = $(".typewriter");
     $output.empty(); // clear out the $output variable
@@ -357,10 +360,9 @@ function registrarProgresso (fase, pontuacao)
         }
     });
 
-    request.done(function(data) {
-        console.log(data);
-        // alert("Salvou!");
-    });
+    // request.done(function(data) {
+        // console.log(data);
+    // });
 
     request.fail(function(jqXHR, textStatus) {
         alert("Ocorreu uma falha na requisição ajax!");

@@ -25,7 +25,7 @@
                 "- Muitos exploradores tentavam achá-la, porém ninguém conseguiu.",
                 "3.mp3"
             ], [
-                "- Até hoje.",
+                "- Até hoje!",
                 "4.mp3"
             ]
         ];
@@ -37,12 +37,17 @@
 
                 var textToDisplay = getFraseSequencial(etapa);
                 if (textToDisplay == -1) { /* acabaram as frases */
+                    etapa = 0;
+                    bloco++;
 
-                    if (bloco == 0) {
+                    let $output = $(".typewriter");
+                    $output.empty(); // clear out the $output variable
+
+                    if (bloco == 1) {
                         $("body").addClass('quadro-1');
                         $(".typewriter").addClass("invisivel");
 
-                    } else if (bloco == 1) { /* renova frases */
+                    } else if (bloco == 2) { /* renova frases */
                         $(".typewriter").removeClass("invisivel");
                         frases = [
                             [
@@ -58,8 +63,9 @@
                         ];
 
                         $("body").addClass('quadro-2');
+                        $("#ancora").click();
 
-                    } else if (bloco == 2) {
+                    } else if (bloco == 3) {
                         frases = [
                             [
                                 "- Veja, lá está a pirâmide, com certeza ela é a entrada para a cidade de ouro, El-Dorado."
@@ -68,8 +74,9 @@
                         ];
 
                         $("body").addClass('quadro-3');
+                        $("#ancora").click();
 
-                    } else if (bloco == 3) {
+                    } else if (bloco == 4) {
 
                         $("body").css('transition', '1s');
                         $("body").css('opacity', 0);
@@ -78,12 +85,6 @@
                             window.location.href = "menu.html";
                         }, 1000);
                     }
-
-                    etapa = 0;
-                    bloco++;
-
-                    let $output = $(".typewriter");
-                    $output.empty(); // clear out the $output variable
 
                 } else {
                     type(textToDisplay[0]);
@@ -110,7 +111,7 @@
         <div class="typewriter"></div>
 
         <div id="containerBotoesConfirm" class="">
-            <a href="#" id="ancora">
+            <a href="javascript:void(0)" id="ancora">
                 Next
             </a>
         </div>
